@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 nombres de medicamentos.txt
+*.env
+.env
+.env.*
+.env.local
+.env.*.local

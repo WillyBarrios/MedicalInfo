@@ -1,0 +1,160 @@
+/* Cards Component Styles */
+
+.cards-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-form {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  border-right: none;
+}
+
+.search-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #333;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #555;
+}
+
+.loading-text {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.error-text {
+  color: #ff6b6b;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100vw;      /* Ocupa el ancho total de la pantalla */
+  max-width: none;   /* Elimina el límite de 1200px */
+}
+.medicine-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 250px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.medicine-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.image-loading {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  color: #666;
+}
+
+.medicine-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #333;
+  background: #fff;
+  color: #333;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.favorite-btn:hover {
+  background: #f0f0f0;
+}
+
+.favorite-btn.active,
+.favorite-btn:disabled {
+  background: #2ecc71;
+  border-color: #2ecc71;
+  color: #fff;
+  cursor: default;
+}
+
+.medicine-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 12px 0 8px 0;
+  color: #333;
+}
+
+.medicine-info {
+  margin: 8px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.medicine-info b {
+  color: #333;
+}
+
+.no-results {
+  color: white;
+  text-align: center;
+  font-size: 18px;
+}
