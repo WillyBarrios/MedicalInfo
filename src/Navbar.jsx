@@ -13,14 +13,20 @@ export default function Navbar({ onSearchIconClick }) {
           <img src={logo} alt="MedicalInfo logo" />
         </Link>
         <div className="navbar-buttons">
-        <Link to="/" className="navbar-button">Medicalinfo</Link>
-        <Link to="/dashboard" className="navbar-button">Dashboard</Link>
+          <Link to="/" className="navbar-button">Medicalinfo</Link>
+          <Link to="/dashboard" className="navbar-button">Dashboard</Link>
+          <Link to="/nosotros" className="navbar-button">Nosotros</Link>
         </div>
       </div>
-      <button onClick={handleSearchClick} className="search-button" title="Buscar">
-        <span role="img" aria-label="Buscar" className="search-icon">🔍</span>
-        <span className="search-text">Busca medicamento</span>
-      </button>
+      <div className="navbar-center">
+        <span className="navbar-slogan">Informacion que cura</span>
+      </div>
+      <div className="navbar-right">
+        <button onClick={handleSearchClick} className="search-button" title="Buscar">
+          <span role="img" aria-label="Buscar" className="search-icon">🔍</span>
+          <span className="search-text">Busca medicamento</span>
+        </button>
+      </div>
     </nav>
   );
 }

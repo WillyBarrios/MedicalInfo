@@ -5,6 +5,6 @@
 }
 
 .dashboard-title {
-  color: #fff;
+  color: var(--color-text);
   margin-bottom: 20px;
 }

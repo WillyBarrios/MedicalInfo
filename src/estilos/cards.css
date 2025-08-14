@@ -11,12 +11,12 @@
 .search-box {
   width: 100%;
   max-width: 600px;
-  background: white;
-  border: 1px solid #ddd;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 40px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(31,34,51,0.08);
 }
 
 .search-form {
@@ -30,7 +30,7 @@
   flex: 1;
   padding: 12px 16px;
   font-size: 16px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 8px 0 0 8px;
   outline: none;
   border-right: none;
@@ -39,19 +39,20 @@
 .search-button {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #333;
-  color: white;
-  border: 1px solid #333;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: 1px solid var(--color-primary);
   border-radius: 0 8px 8px 0;
   cursor: pointer;
 }
 
 .search-button:hover {
-  background-color: #555;
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
 }
 
 .loading-text {
-  color: white;
+  color: var(--color-text);
   text-align: center;
   margin-bottom: 20px;
 }
@@ -71,12 +72,12 @@
   max-width: none;   /* Elimina el límite de 1200px */
 }
 .medicine-card {
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 16px;
   width: 250px;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: var(--color-bg);
+  box-shadow: 0 2px 8px rgba(31,34,51,0.08);
   transition: transform 0.2s ease;
   position: relative;
 }
@@ -92,9 +93,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5;
+  background-color: #F3F4F6;
   border-radius: 4px;
-  color: #666;
+  color: var(--color-muted);
 }
 
 .medicine-image {
@@ -112,9 +113,9 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 1px solid #333;
-  background: #fff;
-  color: #333;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
   font-weight: bold;
   line-height: 1;
   display: flex;
@@ -125,13 +126,14 @@
 }
 
 .favorite-btn:hover {
-  background: #f0f0f0;
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
 }
 
 .favorite-btn.active,
 .favorite-btn:disabled {
-  background: #2ecc71;
-  border-color: #2ecc71;
+  background: #2ECC71;
+  border-color: #2ECC71;
   color: #fff;
   cursor: default;
 }
@@ -140,21 +142,21 @@
   font-size: 18px;
   font-weight: bold;
   margin: 12px 0 8px 0;
-  color: #333;
+  color: var(--color-text);
 }
 
 .medicine-info {
   margin: 8px 0;
-  color: #666;
+  color: var(--color-muted);
   font-size: 14px;
 }
 
 .medicine-info b {
-  color: #333;
+  color: var(--color-text);
 }
 
 .no-results {
-  color: white;
+  color: var(--color-text);
   text-align: center;
   font-size: 18px;
 }

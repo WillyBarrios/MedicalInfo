@@ -103,7 +103,13 @@ export default function Cards() {
                 <button
                   className={`favorite-btn${favorite ? " active" : ""}`}
                   title={favorite ? "Ya en favoritos" : "Agregar a favoritos"}
-                  onClick={() => !favorite && addFavorite(med)}
+                  onClick={() => {
+                    if (!favorite) {
+                      const resolvedImage = cimaUrl || images[med.nregistro] || null;
+                      const medWithImage = { ...med, imageUrl: resolvedImage };
+                      addFavorite(medWithImage);
+                    }
+                  }}
                   aria-label={`${favorite ? "Ya en" : "Agregar a"} favoritos: ${med.nombre}`}
                   disabled={favorite}
                 >

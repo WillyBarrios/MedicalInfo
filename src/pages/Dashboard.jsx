@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar.jsx";
 import { useFavorites } from "../context/FavoritesContext.jsx";
 import "../estilos/cards.css";
@@ -25,8 +25,35 @@ function getCimaImageUrl(med) {
   return null;
 }
 
+const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+const GOOGLE_CX = import.meta.env.VITE_GOOGLE_CX;
+
+async function fetchGoogleImage(query) {
+  if (!GOOGLE_API_KEY || !GOOGLE_CX) return null;
+  const url = `https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&searchType=image&q=${encodeURIComponent(query)}`;
+  try {
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json.items && json.items.length > 0) {
+      return json.items[0].link;
+    }
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
 export default function Dashboard() {
   const { favorites, removeFavorite } = useFavorites();
+  const [imageMap, setImageMap] = useState({});
+
+  useEffect(() => {
+    const initial = {};
+    favorites.forEach((m) => {
+      if (m.imageUrl) initial[m.nregistro] = m.imageUrl;
+    });
+    setImageMap((prev) => ({ ...initial, ...prev }));
+  }, [favorites]);
 
   return (
     <>
@@ -39,7 +66,8 @@ export default function Dashboard() {
         <div className="results-container">
           {favorites.map((med) => {
             const cimaUrl = getCimaImageUrl(med);
-            const imageSrc = cimaUrl || "https://placehold.co/250x150?text=Sin+imagen";
+            const saved = imageMap[med.nregistro] || med.imageUrl || null;
+            const imageSrc = cimaUrl || saved || "https://placehold.co/250x150?text=Sin+imagen";
             return (
               <div key={med.nregistro} className="medicine-card">
                 <button
@@ -54,7 +82,15 @@ export default function Dashboard() {
                   src={imageSrc}
                   alt={med.nombre}
                   className="medicine-image"
-                  onError={(e) => {
+                  onError={async (e) => {
+                    if (!saved && !cimaUrl) {
+                      const url = await fetchGoogleImage(med.nombre);
+                      if (url) {
+                        setImageMap((prev) => ({ ...prev, [med.nregistro]: url }));
+                        e.currentTarget.src = url;
+                        return;
+                      }
+                    }
                     e.currentTarget.src = "https://placehold.co/250x150?text=Sin+imagen";
                   }}
                 />
