@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { driver } from "driver.js";
 import Navbar from "../Navbar.jsx";
 import { useFavorites } from "../context/FavoritesContext.jsx";
 import "../estilos/cards.css";
 import "../estilos/dashboard.css";
-
+// driver.js CSS ya se importa globalmente en main.jsx
 function getCimaImageUrl(med) {
   const base = "https://cima.aemps.es/cima";
   const candidates = [];
@@ -54,6 +55,52 @@ export default function Dashboard() {
     });
     setImageMap((prev) => ({ ...initial, ...prev }));
   }, [favorites]);
+
+  // Tour steps para Dashboard
+  const steps = useMemo(() => ([
+    {
+      element: ".navbar-buttons",
+      popover: {
+        title: "Navegación",
+        description: "Usa estos botones para moverte entre páginas.",
+        side: "bottom"
+      }
+    },
+    {
+      element: ".dashboard-title",
+      popover: {
+        title: "Favoritos",
+        description: "Aquí verás los medicamentos que agregaste como favoritos.",
+        side: "bottom",
+      }
+    },
+    {
+      element: ".results-container",
+      popover: {
+        title: "Listado",
+        description: "Estas son tus cards de medicamentos favoritos.",
+        side: "top",
+      }
+    }
+  ]), []);
+
+  useEffect(() => {
+    const d = driver({
+      prevBtnText: 'Anterior',
+      nextBtnText: 'Siguiente',
+      finishBtnText: 'Finalizar',
+      doneBtnText: 'Cerrar',
+      allowClose: true,
+      animate: true,
+      showProgress: true,
+      showButtons: ['next', 'previous', 'close']
+    });
+    d.setSteps(steps);
+    d.drive();
+    return () => {
+      try { d.destroy(); } catch { /* ignore */ }
+    };
+  }, [steps]);
 
   return (
     <>
