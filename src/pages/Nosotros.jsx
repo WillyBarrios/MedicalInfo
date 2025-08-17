@@ -1,58 +1,56 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../Navbar.jsx";
 import "../estilos/nosotros.css";
 import { driver } from "driver.js";
-// driver.js CSS ya se importa globalmente en main.jsx
+import "driver.js/dist/driver.css";
+
+const driverObj = driver({
+    prevBtnText: 'Anterior',
+    nextBtnText: 'Siguiente',
+    finishBtnText: 'Finalizar',
+    doneBtnText: 'Cerrar',
+    allowClose: true,
+    animate: true,
+    showProgress: true,
+    showButtons: ['next', 'previous', 'close'],
+    steps: [
+        {
+            element: '#quienessomos',
+            popover: {
+                title: 'Que es MedicalInfo',
+                description: 'Pequeña descripcion sobre nuestra empresa',
+                position: 'right'
+            }
+        },
+        {
+            element: '#mision',
+            popover: {
+                title: 'Misión',
+                description: 'Define la razón de ser de la organización, su propósito fundamental y lo que busca lograr',
+                position: 'right'
+            }
+        },
+        {
+            element: '#vision',
+            popover: {
+                title: 'Visión',
+                description: 'Describe la aspiración futura de la empresa, es decir, hacia dónde quiere llegar a largo plazo',
+                position: 'right'
+            }
+        },
+        {
+            element: '.about-title',
+            popover: {
+                title: 'Terminamos',
+                description: 'Hemos llegado al final de nuestra presentación sobre la empresa.',
+                position: 'left'
+            }
+        }
+    ]
+});
+driverObj.drive();
 
 export default function Nosotros() {
-  useEffect(() => {
-    const d = driver({
-      prevBtnText: 'Anterior',
-      nextBtnText: 'Siguiente',
-      finishBtnText: 'Finalizar',
-      doneBtnText: 'Cerrar',
-      allowClose: true,
-      animate: true,
-      showProgress: true,
-      showButtons: ['next', 'previous', 'close']
-    });
-    d.setSteps([
-      {
-        element: '#quienessomos',
-        popover: {
-          title: 'Qué es MedicalInfo',
-          description: 'Pequeña descripción sobre nuestra empresa',
-          position: 'right'
-        }
-      },
-      {
-        element: '#mision',
-        popover: {
-          title: 'Misión',
-          description: 'Define la razón de ser de la organización y su propósito fundamental.',
-          position: 'right'
-        }
-      },
-      {
-        element: '#vision',
-        popover: {
-          title: 'Visión',
-          description: 'Describe la aspiración futura y hacia dónde queremos llegar.',
-          position: 'right'
-        }
-      },
-      {
-        element: '.about-title',
-        popover: {
-          title: 'Terminamos',
-          description: 'Fin de la presentación sobre la empresa.',
-          position: 'left'
-        }
-      }
-    ]);
-    d.drive();
-    return () => { try { d.destroy(); } catch { /* ignore */ } };
-  }, []);
   return (
     <>
       <Navbar />

@@ -1,10 +1,72 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { driver } from "driver.js";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar.jsx";
 import { useFavorites } from "../context/FavoritesContext.jsx";
 import "../estilos/cards.css";
 import "../estilos/dashboard.css";
-// driver.js CSS ya se importa globalmente en main.jsx
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
+
+const driverObj = driver({
+    prevBtnText: 'Anterior',
+    nextBtnText: 'Siguiente',
+    finishBtnText: 'Finalizar',
+    doneBtnText: 'Cerrar',
+    allowClose: true,
+    animate: true,
+    showProgress: true,
+    showButtons: ['next', 'previous', 'close'],
+    steps: [
+        {
+            element: '.dashboard-title',
+            popover: {
+                title: 'Listado de favoritos',
+                description: 'Aqui se cargaran los medicamentos que has marcado como favoritos.',
+                position: 'right'
+            }
+        },
+        {
+            element: '.medicine-title',
+            popover: {
+                title: 'Titulo de medicamento',
+                description: 'Titulo del medicamento seleccionado.',
+                position: 'right'
+            }
+        },
+        {
+            element: '.medicine-info',
+            popover: {
+                title: 'Información del medicamento',
+                description: 'Aqui se mostrara la información detallada del medicamento seleccionado.',
+                position: 'right'
+            }
+        },
+        {
+            element: '.medicine-card',
+            popover: {
+                title: 'Medicamento',
+                description: 'Aqui se mostrara la tarjeta del medicamento seleccionado.',
+                position: 'right'
+            }
+        },
+        {
+            element: '.favorite-btn.active',
+            popover: {
+                title: 'Boton de favoritos',
+                description: 'Aqui se mostrara el estado del medicamento como favorito.',
+                position: 'right'
+            }
+        },
+        {
+            element: '#terminamos',
+            popover: {
+                title: 'Terminamos',
+                description: 'Hemos llegado al final de nuestra presentación sobre el dashboard.',
+                position: 'left'
+            }
+        }
+    ]
+});
+driverObj.drive();
 function getCimaImageUrl(med) {
   const base = "https://cima.aemps.es/cima";
   const candidates = [];
@@ -55,52 +117,6 @@ export default function Dashboard() {
     });
     setImageMap((prev) => ({ ...initial, ...prev }));
   }, [favorites]);
-
-  // Tour steps para Dashboard
-  const steps = useMemo(() => ([
-    {
-      element: ".navbar-buttons",
-      popover: {
-        title: "Navegación",
-        description: "Usa estos botones para moverte entre páginas.",
-        side: "bottom"
-      }
-    },
-    {
-      element: ".dashboard-title",
-      popover: {
-        title: "Favoritos",
-        description: "Aquí verás los medicamentos que agregaste como favoritos.",
-        side: "bottom",
-      }
-    },
-    {
-      element: ".results-container",
-      popover: {
-        title: "Listado",
-        description: "Estas son tus cards de medicamentos favoritos.",
-        side: "top",
-      }
-    }
-  ]), []);
-
-  useEffect(() => {
-    const d = driver({
-      prevBtnText: 'Anterior',
-      nextBtnText: 'Siguiente',
-      finishBtnText: 'Finalizar',
-      doneBtnText: 'Cerrar',
-      allowClose: true,
-      animate: true,
-      showProgress: true,
-      showButtons: ['next', 'previous', 'close']
-    });
-    d.setSteps(steps);
-    d.drive();
-    return () => {
-      try { d.destroy(); } catch { /* ignore */ }
-    };
-  }, [steps]);
 
   return (
     <>
