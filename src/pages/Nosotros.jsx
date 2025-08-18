@@ -1,8 +1,9 @@
 import React from "react";
-import Navbar from "../Navbar.jsx";
+import Navbar from "../modules/Navbar.jsx";
 import "../estilos/nosotros.css";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
+import Footer from '../modules/Footer.jsx';
 
 const driverObj = driver({
     prevBtnText: 'Anterior',
@@ -95,6 +96,7 @@ export default function Nosotros() {
           </article>
         </div>
       </section>
+      <Footer />
     </>
   );
 }

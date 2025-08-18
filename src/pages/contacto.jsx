@@ -1,6 +1,6 @@
 // Importamos React y el hook useState para manejar estados
 import { useState } from "react";
-
+import Navbar from "../modules/Navbar.jsx";
 // Importamos emailjs para enviar correos
 import emailjs from "emailjs-com";
 
@@ -13,6 +13,8 @@ import Swal from "sweetalert2";
 // Importamos el CSS del componente
 import "../estilos/contacto.css";
 
+// Importamos el footer
+import Footer from '../modules/Footer.jsx';
 export default function Contact() {
   // Estado para almacenar los valores del formulario
   const [form, setForm] = useState({
@@ -85,6 +87,8 @@ export default function Contact() {
   };
 
   return (
+    <>
+      <Navbar />
     <div className="contact-page">
       <div className="contact-wrapper">
         
@@ -161,5 +165,7 @@ export default function Contact() {
         </main>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }

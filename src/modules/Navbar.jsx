@@ -1,8 +1,8 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import "./estilos/navbar.css";
-import logo from "./assets/img/logo.png";
+import "../estilos/navbar.css";
+import logo from "../assets/img/logo.png";
 
 export default function Navbar({ onSearchIconClick }) {
   const handleSearchClick = onSearchIconClick || (() => {});
@@ -16,6 +16,7 @@ export default function Navbar({ onSearchIconClick }) {
           <Link to="/" className="navbar-button">Medicalinfo</Link>
           <Link to="/dashboard" className="navbar-button">Dashboard</Link>
           <Link to="/nosotros" className="navbar-button">Nosotros</Link>
+          <Link to="/Contacto" className="navbar-button">Contacto</Link>
         </div>
       </div>
       <div className="navbar-center">

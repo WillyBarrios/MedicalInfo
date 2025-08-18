@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar.jsx";
+import Navbar from "../modules/Navbar.jsx";
 import { useFavorites } from "../context/FavoritesContext.jsx";
 import "../estilos/cards.css";
 import "../estilos/dashboard.css";
