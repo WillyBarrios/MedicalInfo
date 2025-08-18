@@ -1,5 +1,6 @@
-/* Let the app control its own layout; avoid global centering */
-#root {
+
+/* Let the app control its own layout; avoid global centering 
+/*#root {
   max-width: none;
   margin: 0;
   padding: 0;
@@ -13,7 +14,7 @@
 }
 
 .content-wrapper {
-  padding-top: 100px; /* space for fixed navbar */
+  padding-top: 100px; /* space for fixed navbar 
   min-height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
@@ -33,19 +34,9 @@
   max-width: 1200px;
   padding: 0 20px;
 }
+*/
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+
 
 @keyframes logo-spin {
   from {

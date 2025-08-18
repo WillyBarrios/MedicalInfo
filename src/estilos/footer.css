@@ -1,0 +1,188 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  position: relative;
+  width: 90vw;
+    max-width: 2000px;
+  background: linear-gradient(135deg, #1f2233, #2c324d);
+  color: white;
+  padding: 25px 0;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  border-top: 2px solid #00bfff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Texto principal con gradiente */
+footer p {
+  background: linear-gradient(90deg, #00bfff, #66d9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Links del footer */
+.footer-links {
+  margin-top: 10px;
+}
+
+.footer-links a {
+  color: #00bfff;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px #00bfff;
+}
+
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #00bfff;
+  left: 0;
+  bottom: -4px;
+  transition: width 0.3s;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+/* Redes sociales abajo a la izquierda */
+.footer-socials {
+  position: absolute;
+  left: 25px;
+  bottom: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.footer-socials a {
+  color: #ffffff;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+  color: #00bfff;
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.2) rotate(8deg);
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.5);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos generales (PC) */
+footer {
+  position: relative;
+  width: 100vw;
+  background: linear-gradient(135deg, #1f2233, #2c324d);
+  color: white;
+  padding: 25px 0;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Redes sociales a la izquierda (PC) */
+.footer-socials {
+  position: absolute;
+  left: 25px;
+  bottom: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+/* 📱 Estilos para pantallas menores a 768px (tablets y celulares) */
+@media (max-width: 768px) {
+  footer {
+    text-align: center;
+    padding-bottom: 60px; /* espacio para redes */
+  }
+
+  /* Redes sociales ahora centradas abajo */
+  .footer-socials {
+    position: static;
+    justify-content: center;
+    margin-top: 15px;
+  }
+
+  /* Enlaces en columna para móvil */
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* 📱 Extra pequeño (menor a 480px) */
+@media (max-width: 480px) {
+  .footer-links a {
+    font-size: 14px;
+  }
+
+  .footer-socials a {
+    font-size: 20px;
+    padding: 6px;
+  }
+}
+
+
+/* Clase derecha: solo para el texto de recordatorio */
+.derecha {
+  position: absolute;
+  right: 25px; /* extremo derecho */
+  top: 50%; /* centro vertical */
+  transform: translateY(-50%);
+  font-weight: 700;
+  font-size: 1.6rem; /* grande y legible */
+  color: #ffffff; /* letras blancas */
+  background: rgba(44, 50, 77, 0.85); /* fondo semitransparente moderno */
+  padding: 12px 24px; /* espacio interno */
+  border-radius: 15px; /* bordes redondeados */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* borde sutil */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* sombra ligera para profundidad */
+  transition: transform 0.3s ease;
+}
+
+/* Efecto hover: leve movimiento */
+.derecha:hover {
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* Responsivo: en móviles se centra y mantiene tamaño */
+@media (max-width: 768px) {
+  .derecha {
+    position: static;
+    transform: none;
+    text-align: center;
+    margin: 15px 0;
+    font-size: 1.8rem; /* más grande en móvil */
+  }
+}

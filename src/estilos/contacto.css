@@ -1,0 +1,232 @@
+/* ------------------- CONFIGURACIÓN GENERAL ------------------- */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Envuelve el formulario y la imagen en un div .contact-page */
+.contact-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 56px 0; /* Espacio para que el footer no se pegue */
+}
+
+
+/* ------------------- ANIMACIÓN DE ENTRADA DEL FORMULARIO ------------------- */
+.contact-container {
+  animation: fadeIn 0.8s ease-in-out; /* Animación al cargar */
+  background: rgba(249, 255, 251, 0.15); /* Fondo semitransparente */
+  backdrop-filter: blur(12px); /* Desenfoque de fondo */
+  border: 1px solid rgba(228, 228, 228, 0.3); /* Borde suave */
+  color: #fff; /* Texto blanco */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4); /* Sombra */
+  max-width: 650px; /* Máximo ancho */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 40px; /* Espaciado interno */
+}
+
+/* Animación fadeIn */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); } /* Empieza opaco y desplazado */
+  to { opacity: 1; transform: translateY(0); } /* Termina visible y en posición */
+}
+
+/* ------------------- TEXTO DEL TELÉFONO ------------------- */
+.phone {
+  margin-bottom: 15px;
+  font-size: 1.2rem; /* Texto más grande */
+  font-weight: bold; /* Negrita */
+  color: #fff;
+}
+
+/* ------------------- ESTILOS DEL FORMULARIO ------------------- */
+.contact-form {
+  display: flex;
+  flex-direction: column; /* Alinea campos en columna */
+  gap: 15px; /* Espacio entre campos */
+}
+
+.contact-form label {
+  font-weight: bold;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column; /* Texto encima del input */
+  gap: 5px;
+}
+
+/* Íconos en las etiquetas */
+.icon {
+  margin-right: 6px;
+  color: #ffffff;
+}
+
+/* ------------------- CAMPOS DE TEXTO ------------------- */
+.contact-form input,
+.contact-form textarea {
+  width: 100%; /* Ocupa todo el ancho */
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
+  color: #070404; /* Texto oscuro */
+  border: 1px solid #ddd; /* Borde gris claro */
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px; /* Bordes redondeados */
+  outline: none; /* Quita borde por defecto al enfocar */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+/* Efecto al enfocar un input o textarea */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #1e00ff; /* Borde azul */
+  box-shadow: 0 0 8px rgba(30, 0, 255, 0.5); /* Sombra azul */
+}
+
+/* Evita que el textarea cambie de tamaño */
+.contact-form textarea {
+  resize: none;
+}
+
+/* ------------------- CONTADOR DE CARACTERES ------------------- */
+.char-count {
+  font-size: 0.8rem;
+  color: #ccc; /* Gris claro */
+  align-self: flex-end; /* Se alinea a la derecha */
+}
+
+/* ------------------- BOTÓN DE ENVÍO ------------------- */
+.contact-form button {
+  align-self: flex-end; /* Se alinea a la derecha */
+  padding: 10px 18px;
+  background: linear-gradient(45deg, #253AFF, #2139f1); /* Gradiente azul */
+  background-size: 200% 200%; /* Para animar el gradiente */
+  animation: gradientMove 3s infinite alternate; /* Movimiento del gradiente */
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+/* Efecto hover en el botón */
+.contact-form button:hover {
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+}
+
+/* Animación del gradiente */
+@keyframes gradientMove {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}
+
+/* ------------------- SPINNER DE CARGA ------------------- */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #5500ff; /* Color base */
+  border-top: 3px solid transparent; /* Parte transparente para girar */
+  border-radius: 50%; /* Redondo */
+  display: inline-block;
+  animation: spin 0.8s linear infinite; /* Gira continuamente */
+}
+
+/* Animación del spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ------------------- CONTENEDOR PRINCIPAL ------------------- */
+.contact-wrapper {
+  display: flex; /* Imagen y formulario lado a lado */
+  background: rgba(0, 72, 255, 0.642); /* Fondo translúcido azul */
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  overflow: hidden; /* Bordes recortados */
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+  max-width: 900px;
+  width: 100%;
+}
+
+/* ------------------- SECCIÓN DE IMAGEN ------------------- */
+.contact-image {
+  flex: 1; /* Ocupa mitad del espacio */
+  min-width: 300px; /* Mínimo ancho */
+}
+
+.contact-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantiene proporción sin deformar */
+}
+
+/* ------------------- SECCIÓN DEL FORMULARIO ------------------- */
+.contact-container {
+  flex: 1;
+  padding: 40px;
+  color: #ffffff;
+}
+
+/* ------------------- RESPONSIVE ------------------- */
+@media (max-width: 1024px) {
+  .contact-wrapper {
+    flex-direction: column; /* Pone imagen y formulario en columna */
+    max-width: 90%;
+  }
+
+  .contact-image {
+    min-width: 100%;
+    height: 250px; /* Ajusta altura de la imagen */
+  }
+
+  .contact-container {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 20px;
+  }
+
+  .contact-form button {
+    width: 100%; /* Botón ocupa todo el ancho */
+    text-align: center;
+  }
+
+  .phone {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-wrapper {
+    flex-direction: column;
+    padding: 0 10px;
+  }
+
+  .contact-image {
+    height: 200px;
+  }
+
+  .contact-container {
+    padding: 15px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .contact-form label {
+    font-size: 0.9rem;
+  }
+
+  .contact-form button {
+    font-size: 0.95rem;
+  }
+}
