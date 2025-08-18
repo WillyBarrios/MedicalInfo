@@ -26,9 +26,9 @@ export function useMedicamentos(nombre) {
   useEffect(() => {
     if (nombre && nombre.trim() !== "") {
       fetchMedicamentos(nombre);
+    } else {
+      setData(null);
     }
-    // Si quieres limpiar resultados cuando el nombre está vacío, descomenta:
-    // else setData(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nombre]);
 
