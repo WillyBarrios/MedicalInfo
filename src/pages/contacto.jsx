@@ -11,7 +11,7 @@ import { FaUser, FaBirthdayCake, FaEnvelope, FaCommentDots } from "react-icons/f
 import Swal from "sweetalert2";
 
 // Importamos el CSS del componente
-import "./estilos/contacto.css";
+import "../estilos/contacto.css";
 
 export default function Contact() {
   // Estado para almacenar los valores del formulario
@@ -90,7 +90,7 @@ export default function Contact() {
         
         {/* Lado izquierdo con imagen decorativa */}
         <div className="contact-image">
-          <img src="src/assets/img/imagen.png" alt="Contacto" />
+          <img src="src/assets/img/imagen.jpg" alt="Contacto" />
         </div>
 
         {/* Lado derecho con formulario */}
