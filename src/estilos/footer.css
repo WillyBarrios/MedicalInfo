@@ -127,3 +127,48 @@ footer p {
     width: 100%; /* Ocupa todo el ancho disponible */
   }
 }
+
+/* ---------------------- CONTENEDOR FLEX ---------------------- */
+.footer-container {
+  display: flex;
+  justify-content: space-between; /* distribuye izq - centro - der */
+  align-items: center;
+  max-width: 1200px; /* ancho máximo */
+  margin: 0 auto; /* centrar en pantalla */
+  padding: 0 20px;
+  flex-wrap: wrap; /* en móvil se apilan */
+}
+
+/* Secciones */
+.footer-left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.footer-center {
+  flex: 2;
+  text-align: center;
+}
+
+.footer-right {
+  flex: 1;
+  text-align: right;
+}
+
+/* ---------------------- RESPONSIVE ---------------------- */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    flex: unset;
+    justify-content: center;
+    text-align: center;
+  }
+}

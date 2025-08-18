@@ -16,7 +16,7 @@ html, body {
   justify-content: center;
   align-items: center;
   padding: 56px 10px;
-  min-height: 100vh;
+  min-height: 130vh;
   box-sizing: border-box;
 }
 
@@ -27,8 +27,8 @@ html, body {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
-  max-width: 1100px;
-  width: 100%;
+  max-width: 900px;
+  width: 80%;
 }
 
 /* ------------------- SECCIÓN DE IMAGEN ------------------- */
@@ -59,6 +59,7 @@ html, body {
   width: 100%;
   box-sizing: border-box;
   animation: fadeIn 0.8s ease-in-out;
+  
 }
 
 /* ------------------- FORMULARIO ------------------- */
