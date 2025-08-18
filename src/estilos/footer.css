@@ -96,9 +96,9 @@ footer p {
 
 /* ---------------------- TEXTO ESPECIAL A LA DERECHA ---------------------- */
 .derecha {
-  margin-top: 15px; /* Separación del resto */
-  font-weight: 700; /* Más grueso */
-  font-size: 1.3rem; /* Tamaño más grande */
+  margin-top: 0px; /* Separación del resto */
+  font-weight: 500; /* Más grueso */
+  font-size: 1.0rem; /* Tamaño más grande */
   color: #ffffff;
   background: rgba(44, 50, 77, 0.85); /* Fondo semitransparente oscuro */
   padding: 10px 20px; /* Espaciado dentro del bloque */
@@ -154,6 +154,8 @@ footer p {
 .footer-right {
   flex: 1;
   text-align: right;
+  display: flex;
+  justify-content: flex-end; /* 👉 alinea a la derecha en escritorio */
 }
 
 /* ---------------------- RESPONSIVE ---------------------- */
@@ -168,7 +170,48 @@ footer p {
   .footer-center,
   .footer-right {
     flex: unset;
-    justify-content: center;
+    justify-content: center; /* 👉 ahora centrado en móvil */
     text-align: center;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-socials {
+    gap: 8px;
+  }
+
+  .derecha {
+    font-size: 0.95rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* Mantener el estilo en escritorio */
+.footer-right {
+  flex: 1;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Ajustes para móvil */
+@media (max-width: 768px) {
+  .footer-right {
+    flex: unset;
+    justify-content: center; /* 👉 Centrar en móviles */
+    text-align: center;
+  }
+
+  .derecha {
+    font-size: 0.95rem; /* Texto un poco más pequeño en móviles */
+    width: 100%; /* Ocupa todo el ancho */
+    text-align: center; /* Centrado */
+    padding: 8px 12px; /* Ajustar padding */
+    box-sizing: border-box; /* Evitar que se salga del contenedor */
   }
 }
