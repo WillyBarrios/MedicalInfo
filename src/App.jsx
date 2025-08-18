@@ -1,43 +1,31 @@
 
-import './App.css'
-import Contact from './pages/contacto'
+
+import React, { useState } from "react";
+import Navbar from "./Navbar";
+import Cards from "./modules/Cards";
+import "./App.css";
 import Footer from './modules/Footer'
 
 function App() {
+  const [showSearchBar, setShowSearchBar] = useState(false);
+
+  const [count, setCount] = useState(0)
+
+
   return (
-    <>
-      <Contact />
-      <Footer />
-    </>
+    <div className="app-container">
+      <Navbar onSearchIconClick={() => setShowSearchBar(true)} />
+      <div className={`content-wrapper${showSearchBar ? " visible" : ""}`}>
+        {showSearchBar && (
+          <div className="content-inner">
+            <Cards />
+          </div>
+        )}
+      </div>
+
+    </div>
   );
+   <Footer />
 }
 
-
-  /*const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )*/
-
-export default App
+export default App;

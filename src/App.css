@@ -1,4 +1,42 @@
 
+/* Let the app control its own layout; avoid global centering 
+/*#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: initial;
+}
+
+.app-container {
+  padding: 0;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.content-wrapper {
+  padding-top: 100px; /* space for fixed navbar 
+  min-height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.content-wrapper.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.content-inner {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+*/
+
+
 
 @keyframes logo-spin {
   from {

@@ -1,0 +1,10 @@
+/* Dashboard specific styles */
+
+.dashboard-container {
+  padding-top: 120px; /* espacio superior (si usas navbar fijo en esta vista) */
+}
+
+.dashboard-title {
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
