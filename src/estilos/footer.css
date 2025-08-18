@@ -1,188 +1,129 @@
-/*html, body {
-  margin: 0;
-  padding: 0;
-}*/
-
+/* ---------------------- ESTILO DEL FOOTER ---------------------- */
 footer {
-  position: relative;
-  width: 90vw;
-    max-width: 2000px;
-  background: linear-gradient(135deg, #1f2233, #2c324d);
-  color: white;
-  padding: 25px 0;
-  text-align: center;
-  font-family: 'Segoe UI', sans-serif;
-  border-top: 2px solid #00bfff;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-  animation: fadeIn 1s ease-in-out;
+  width: 100%; /* Que ocupe todo el ancho de la pantalla */
+  background: linear-gradient(135deg, #1f2233, #2c324d); /* Fondo con degradado diagonal */
+  color: white; /* Color de texto por defecto */
+  padding: 25px 0; /* Espaciado arriba y abajo */
+  text-align: center; /* Centrar el contenido */
+  font-family: 'Segoe UI', sans-serif; /* Fuente principal */
+  border-top: 2px solid #00bfff; /* Borde superior azul */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5); /* Sombra sutil encima del footer */
+  animation: fadeIn 1s ease-in-out; /* Animación de aparición */
 }
 
-/* Texto principal con gradiente */
+/* ---------------------- TEXTO PRINCIPAL CON GRADIENTE ---------------------- */
 footer p {
-  background: linear-gradient(90deg, #00bfff, #66d9ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #00bfff, #66d9ff); /* Degradado horizontal para el texto */
+  -webkit-background-clip: text; /* Recorta el fondo al texto */
+  -webkit-text-fill-color: transparent; /* Hace transparente el texto para mostrar el gradiente */
+  font-weight: bold; /* Texto en negrita */
+  font-size: 1.1rem; /* Tamaño de fuente */
+  letter-spacing: 0.5px; /* Espacio entre letras */
+  margin: 0; /* Quitar margen por defecto */
 }
 
-/* Links del footer */
+/* ---------------------- LINKS DEL FOOTER ---------------------- */
 .footer-links {
-  margin-top: 10px;
+  margin-top: 10px; /* Separación del texto principal */
 }
 
 .footer-links a {
-  color: #00bfff;
-  margin: 0 12px;
-  text-decoration: none;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  position: relative;
+  color: #00bfff; /* Color azul inicial */
+  margin: 0 12px; /* Separación entre enlaces */
+  text-decoration: none; /* Quitar subrayado */
+  font-weight: 500; /* Fuente semi-bold */
+  letter-spacing: 0.5px; /* Espaciado entre letras */
+  transition: all 0.3s ease; /* Animación suave al pasar el mouse */
+  position: relative; /* Para poder usar pseudo-elementos ::after */
 }
 
 .footer-links a:hover {
-  color: #ffffff;
-  text-shadow: 0 0 8px #00bfff;
+  color: #ffffff; /* Cambia a blanco al pasar el mouse */
+  text-shadow: 0 0 8px #00bfff; /* Sombra azul brillante */
 }
 
+/* Línea animada debajo del enlace */
 .footer-links a::after {
   content: "";
   position: absolute;
-  width: 0%;
+  width: 0%; /* Inicialmente invisible */
   height: 2px;
-  background: #00bfff;
+  background: #00bfff; /* Color de la línea */
   left: 0;
   bottom: -4px;
-  transition: width 0.3s;
+  transition: width 0.3s; /* Animación de ancho */
 }
 
 .footer-links a:hover::after {
-  width: 100%;
+  width: 100%; /* Línea se expande al pasar el mouse */
 }
 
-/* Redes sociales abajo a la izquierda */
+/* ---------------------- REDES SOCIALES ---------------------- */
 .footer-socials {
-  position: absolute;
-  left: 25px;
-  bottom: 20px;
   display: flex;
-  gap: 12px;
+  justify-content: center; /* Centrar los iconos */
+  margin-top: 20px; /* Separación del resto */
+  gap: 12px; /* Espacio entre iconos */
 }
 
 .footer-socials a {
-  color: #ffffff;
-  font-size: 24px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 8px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
+  color: #ffffff; /* Color blanco por defecto */
+  font-size: 24px; /* Tamaño de iconos */
+  background: rgba(255, 255, 255, 0.05); /* Fondo translúcido */
+  padding: 8px; /* Espaciado dentro del círculo */
+  border-radius: 50%; /* Hacer círculos */
+  transition: all 0.3s ease; /* Animación suave */
 }
 
 .footer-socials a:hover {
-  color: #00bfff;
-  background: rgba(255, 255, 255, 0.15);
-  transform: scale(1.2) rotate(8deg);
-  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.5);
+  color: #00bfff; /* Cambia a azul al pasar el mouse */
+  background: rgba(255, 255, 255, 0.15); /* Fondo más visible */
+  transform: scale(1.2) rotate(8deg); /* Aumenta tamaño y rota un poco */
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.5); /* Sombra azul brillante */
 }
 
-/* Animación de entrada */
+/* ---------------------- ANIMACIÓN FADE IN ---------------------- */
 @keyframes fadeIn {
   from {
-    opacity: 0;
-    transform: translateY(15px);
+    opacity: 0; /* Inicia invisible */
+    transform: translateY(15px); /* Se desplaza un poco hacia abajo */
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* Termina visible */
+    transform: translateY(0); /* Vuelve a su posición original */
   }
 }
 
-/* Estilos generales (PC) */
-footer {
-  position: relative;
-  width: 100vw;
-  background: linear-gradient(135deg, #1f2233, #2c324d);
-  color: white;
-  padding: 25px 0;
-  text-align: center;
-  font-family: 'Segoe UI', sans-serif;
+/* ---------------------- TEXTO ESPECIAL A LA DERECHA ---------------------- */
+.derecha {
+  margin-top: 15px; /* Separación del resto */
+  font-weight: 700; /* Más grueso */
+  font-size: 1.3rem; /* Tamaño más grande */
+  color: #ffffff;
+  background: rgba(44, 50, 77, 0.85); /* Fondo semitransparente oscuro */
+  padding: 10px 20px; /* Espaciado dentro del bloque */
+  border-radius: 15px; /* Bordes redondeados */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra suave */
+  transition: transform 0.3s ease; /* Animación al hacer hover */
+  display: inline-block; /* Para que no ocupe toda la fila */
 }
 
-/* Redes sociales a la izquierda (PC) */
-.footer-socials {
-  position: absolute;
-  left: 25px;
-  bottom: 20px;
-  display: flex;
-  gap: 12px;
+.derecha:hover {
+  transform: scale(1.05); /* Aumenta un poquito al pasar el mouse */
 }
 
-/* 📱 Estilos para pantallas menores a 768px (tablets y celulares) */
+/* ---------------------- RESPONSIVE ---------------------- */
 @media (max-width: 768px) {
-  footer {
-    text-align: center;
-    padding-bottom: 60px; /* espacio para redes */
-  }
-
-  /* Redes sociales ahora centradas abajo */
-  .footer-socials {
-    position: static;
-    justify-content: center;
-    margin-top: 15px;
-  }
-
-  /* Enlaces en columna para móvil */
   .footer-links {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-}
-
-/* 📱 Extra pequeño (menor a 480px) */
-@media (max-width: 480px) {
-  .footer-links a {
-    font-size: 14px;
+    flex-direction: column; /* Links en columna para móviles */
+    gap: 8px; /* Separación vertical */
   }
 
-  .footer-socials a {
-    font-size: 20px;
-    padding: 6px;
-  }
-}
-
-
-/* Clase derecha: solo para el texto de recordatorio */
-.derecha {
-  position: absolute;
-  right: 25px; /* extremo derecho */
-  top: 50%; /* centro vertical */
-  transform: translateY(-50%);
-  font-weight: 700;
-  font-size: 1.6rem; /* grande y legible */
-  color: #ffffff; /* letras blancas */
-  background: rgba(44, 50, 77, 0.85); /* fondo semitransparente moderno */
-  padding: 12px 24px; /* espacio interno */
-  border-radius: 15px; /* bordes redondeados */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* borde sutil */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* sombra ligera para profundidad */
-  transition: transform 0.3s ease;
-}
-
-/* Efecto hover: leve movimiento */
-.derecha:hover {
-  transform: translateY(-50%) scale(1.05);
-}
-
-/* Responsivo: en móviles se centra y mantiene tamaño */
-@media (max-width: 768px) {
   .derecha {
-    position: static;
-    transform: none;
-    text-align: center;
-    margin: 15px 0;
-    font-size: 1.8rem; /* más grande en móvil */
+    font-size: 1.1rem; /* Ajusta tamaño en móvil */
+    text-align: center; /* Centrar texto */
+    width: 100%; /* Ocupa todo el ancho disponible */
   }
 }

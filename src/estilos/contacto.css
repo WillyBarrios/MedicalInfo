@@ -1,185 +1,148 @@
 /* ------------------- CONFIGURACIÓN GENERAL ------------------- */
-body {
+html, body {
   font-family: Arial, sans-serif;
   background-color: #ffffff;
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* 🔑 elimina barra horizontal */
+  box-sizing: border-box;
 }
 
-/* Envuelve el formulario y la imagen en un div .contact-page */
+/* ------------------- CONTENEDOR PRINCIPAL ------------------- */
 .contact-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 56px 0; /* Espacio para que el footer no se pegue */
+  padding: 56px 10px;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
+.contact-wrapper {
+  display: flex;
+  background: rgba(0, 72, 255, 0.65);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+  max-width: 1100px;
+  width: 100%;
+}
 
-/* ------------------- ANIMACIÓN DE ENTRADA DEL FORMULARIO ------------------- */
+/* ------------------- SECCIÓN DE IMAGEN ------------------- */
+.contact-image {
+  flex: 1;
+  min-width: 0; /* 🔑 evita que flex fuerce el ancho */
+}
+
+.contact-image img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%; /* 🔑 nunca se pasa del contenedor */
+  object-fit: cover;
+  display: block; /* evita espacio fantasma */
+}
+
+/* ------------------- SECCIÓN DEL FORMULARIO ------------------- */
 .contact-container {
-  animation: fadeIn 0.8s ease-in-out; /* Animación al cargar */
-  background: rgba(249, 255, 251, 0.15); /* Fondo semitransparente */
-  backdrop-filter: blur(12px); /* Desenfoque de fondo */
-  border: 1px solid rgba(228, 228, 228, 0.3); /* Borde suave */
-  color: #fff; /* Texto blanco */
-  border-radius: 15px; /* Bordes redondeados */
-  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4); /* Sombra */
-  max-width: 650px; /* Máximo ancho */
-  width: 100%; /* Ocupa todo el ancho disponible */
-  padding: 40px; /* Espaciado interno */
+  flex: 1;
+  min-width: 0; /* 🔑 evita cortes en flexbox */
+  padding: 40px;
+  color: #ffffff;
+  background: rgba(249, 255, 251, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(228, 228, 228, 0.3);
+  border-radius: 15px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  box-sizing: border-box;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
-/* Animación fadeIn */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); } /* Empieza opaco y desplazado */
-  to { opacity: 1; transform: translateY(0); } /* Termina visible y en posición */
-}
-
-/* ------------------- TEXTO DEL TELÉFONO ------------------- */
-.phone {
-  margin-bottom: 15px;
-  font-size: 1.2rem; /* Texto más grande */
-  font-weight: bold; /* Negrita */
-  color: #fff;
-}
-
-/* ------------------- ESTILOS DEL FORMULARIO ------------------- */
+/* ------------------- FORMULARIO ------------------- */
 .contact-form {
   display: flex;
-  flex-direction: column; /* Alinea campos en columna */
-  gap: 15px; /* Espacio entre campos */
+  flex-direction: column;
+  gap: 15px;
 }
 
 .contact-form label {
   font-weight: bold;
   font-size: 0.95rem;
   display: flex;
-  flex-direction: column; /* Texto encima del input */
+  flex-direction: column;
   gap: 5px;
 }
 
-/* Íconos en las etiquetas */
-.icon {
-  margin-right: 6px;
-  color: #ffffff;
-}
-
-/* ------------------- CAMPOS DE TEXTO ------------------- */
 .contact-form input,
 .contact-form textarea {
-  width: 100%; /* Ocupa todo el ancho */
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
-  color: #070404; /* Texto oscuro */
-  border: 1px solid #ddd; /* Borde gris claro */
+  width: 100%;
+  max-width: 100%; /* 🔑 asegura que no se desborde */
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #070404;
+  border: 1px solid #ddd;
   padding: 10px;
   font-size: 1rem;
-  border-radius: 6px; /* Bordes redondeados */
-  outline: none; /* Quita borde por defecto al enfocar */
-  transition: all 0.3s ease; /* Transición suave */
+  border-radius: 6px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
-/* Efecto al enfocar un input o textarea */
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: #1e00ff; /* Borde azul */
-  box-shadow: 0 0 8px rgba(30, 0, 255, 0.5); /* Sombra azul */
+  border-color: #1e00ff;
+  box-shadow: 0 0 8px rgba(30, 0, 255, 0.5);
 }
 
-/* Evita que el textarea cambie de tamaño */
 .contact-form textarea {
   resize: none;
 }
 
-/* ------------------- CONTADOR DE CARACTERES ------------------- */
-.char-count {
-  font-size: 0.8rem;
-  color: #ccc; /* Gris claro */
-  align-self: flex-end; /* Se alinea a la derecha */
-}
-
-/* ------------------- BOTÓN DE ENVÍO ------------------- */
+/* ------------------- BOTÓN ------------------- */
 .contact-form button {
-  align-self: flex-end; /* Se alinea a la derecha */
+  align-self: flex-end;
   padding: 10px 18px;
-  background: linear-gradient(45deg, #253AFF, #2139f1); /* Gradiente azul */
-  background-size: 200% 200%; /* Para animar el gradiente */
-  animation: gradientMove 3s infinite alternate; /* Movimiento del gradiente */
+  background: linear-gradient(45deg, #253AFF, #2139f1);
+  background-size: 200% 200%;
+  animation: gradientMove 3s infinite alternate;
   color: white;
   border: none;
   border-radius: 7px;
   cursor: pointer;
   font-size: 1rem;
   transition: transform 0.2s ease;
+  max-width: 100%; /* 🔑 evita desbordes */
+  box-sizing: border-box;
 }
 
-/* Efecto hover en el botón */
 .contact-form button:hover {
-  transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+  transform: scale(1.05);
 }
 
-/* Animación del gradiente */
+/* ------------------- ANIMACIONES ------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes gradientMove {
   0% { background-position: left; }
   100% { background-position: right; }
 }
 
-/* ------------------- SPINNER DE CARGA ------------------- */
-.spinner {
-  width: 18px;
-  height: 18px;
-  border: 3px solid #5500ff; /* Color base */
-  border-top: 3px solid transparent; /* Parte transparente para girar */
-  border-radius: 50%; /* Redondo */
-  display: inline-block;
-  animation: spin 0.8s linear infinite; /* Gira continuamente */
-}
-
-/* Animación del spinner */
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ------------------- CONTENEDOR PRINCIPAL ------------------- */
-.contact-wrapper {
-  display: flex; /* Imagen y formulario lado a lado */
-  background: rgba(0, 72, 255, 0.642); /* Fondo translúcido azul */
-  backdrop-filter: blur(12px);
-  border-radius: 15px;
-  overflow: hidden; /* Bordes recortados */
-  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
-  max-width: 900px;
-  width: 100%;
-}
-
-/* ------------------- SECCIÓN DE IMAGEN ------------------- */
-.contact-image {
-  flex: 1; /* Ocupa mitad del espacio */
-  min-width: 300px; /* Mínimo ancho */
-}
-
-.contact-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Mantiene proporción sin deformar */
-}
-
-/* ------------------- SECCIÓN DEL FORMULARIO ------------------- */
-.contact-container {
-  flex: 1;
-  padding: 40px;
-  color: #ffffff;
-}
-
 /* ------------------- RESPONSIVE ------------------- */
 @media (max-width: 1024px) {
   .contact-wrapper {
-    flex-direction: column; /* Pone imagen y formulario en columna */
-    max-width: 90%;
+    flex-direction: column;
+    max-width: 95%;
   }
 
   .contact-image {
     min-width: 100%;
-    height: 250px; /* Ajusta altura de la imagen */
+    height: 300px;
   }
 
   .contact-container {
@@ -193,19 +156,17 @@ body {
   }
 
   .contact-form button {
-    width: 100%; /* Botón ocupa todo el ancho */
+    width: 100%;
     text-align: center;
-  }
-
-  .phone {
-    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .contact-wrapper {
     flex-direction: column;
-    padding: 0 10px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
   }
 
   .contact-image {
