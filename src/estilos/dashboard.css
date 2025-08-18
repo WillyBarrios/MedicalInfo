@@ -1,3 +1,25 @@
+/* Sticky footer layout solo para Dashboard */
+.dashboard-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-page > .dashboard-container,
+.dashboard-page > .cards-container.dashboard-container {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.dashboard-page > .cards-container {
+  flex: 1 0 auto;
+}
+
+.dashboard-page > footer {
+  flex-shrink: 0;
+}
 /* Dashboard specific styles */
 
 .dashboard-container {

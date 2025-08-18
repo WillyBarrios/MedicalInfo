@@ -44,12 +44,19 @@ async function fetchGoogleImage(query) {
   return null;
 }
 
-export default function Cards() {
+export default function Cards({ searchQuery }) {
   const [nombre, setNombre] = useState("");
   const { data, loading, error, fetchMedicamentos } = useMedicamentos(nombre);
   const [images, setImages] = useState({}); // map nregistro -> url google
   const [imageLoading, setImageLoading] = useState({}); // map nregistro -> boolean
   const { addFavorite, isFavorite } = useFavorites();
+
+  // Sincroniza el prop searchQuery con el estado interno y busca automáticamente
+  useEffect(() => {
+    if (typeof searchQuery === "string" && searchQuery.trim() !== "") {
+      setNombre(searchQuery);
+    }
+  }, [searchQuery]);
 
   useEffect(() => {
     if (data && data.resultados && data.resultados.length > 0) {

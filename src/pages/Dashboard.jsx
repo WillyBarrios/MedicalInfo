@@ -5,6 +5,7 @@ import "../estilos/cards.css";
 import "../estilos/dashboard.css";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
+import Footer from "../modules/Footer.jsx";
 
 const driverObj = driver({
     prevBtnText: 'Anterior',
@@ -119,54 +120,55 @@ export default function Dashboard() {
   }, [favorites]);
 
   return (
-    <>
+    <div className="dashboard-page">
       <Navbar />
       <div className="cards-container dashboard-container">
-      <h2 className="dashboard-title">Favoritos</h2>
-      {favorites.length === 0 ? (
-        <p className="no-results">No hay medicamentos en favoritos.</p>
-      ) : (
-        <div className="results-container">
-          {favorites.map((med) => {
-            const cimaUrl = getCimaImageUrl(med);
-            const saved = imageMap[med.nregistro] || med.imageUrl || null;
-            const imageSrc = cimaUrl || saved || "https://placehold.co/250x150?text=Sin+imagen";
-            return (
-              <div key={med.nregistro} className="medicine-card">
-                <button
-                  className="favorite-btn active"
-                  title="Quitar de favoritos"
-                  onClick={() => removeFavorite(med.nregistro)}
-                  aria-label={`Quitar ${med.nombre} de favoritos`}
-                >
-                  ✓
-                </button>
-                <img
-                  src={imageSrc}
-                  alt={med.nombre}
-                  className="medicine-image"
-                  onError={async (e) => {
-                    if (!saved && !cimaUrl) {
-                      const url = await fetchGoogleImage(med.nombre);
-                      if (url) {
-                        setImageMap((prev) => ({ ...prev, [med.nregistro]: url }));
-                        e.currentTarget.src = url;
-                        return;
+        <h2 className="dashboard-title">Favoritos</h2>
+        {favorites.length === 0 ? (
+          <p className="no-results">No hay medicamentos en favoritos.</p>
+        ) : (
+          <div className="results-container">
+            {favorites.map((med) => {
+              const cimaUrl = getCimaImageUrl(med);
+              const saved = imageMap[med.nregistro] || med.imageUrl || null;
+              const imageSrc = cimaUrl || saved || "https://placehold.co/250x150?text=Sin+imagen";
+              return (
+                <div key={med.nregistro} className="medicine-card">
+                  <button
+                    className="favorite-btn active"
+                    title="Quitar de favoritos"
+                    onClick={() => removeFavorite(med.nregistro)}
+                    aria-label={`Quitar ${med.nombre} de favoritos`}
+                  >
+                    ✓
+                  </button>
+                  <img
+                    src={imageSrc}
+                    alt={med.nombre}
+                    className="medicine-image"
+                    onError={async (e) => {
+                      if (!saved && !cimaUrl) {
+                        const url = await fetchGoogleImage(med.nombre);
+                        if (url) {
+                          setImageMap((prev) => ({ ...prev, [med.nregistro]: url }));
+                          e.currentTarget.src = url;
+                          return;
+                        }
                       }
-                    }
-                    e.currentTarget.src = "https://placehold.co/250x150?text=Sin+imagen";
-                  }}
-                />
-                <h3 className="medicine-title">{med.nombre}</h3>
-                <p className="medicine-info"><b>ID:</b> {med.nregistro}</p>
-                <p className="medicine-info"><b>Vía de administración:</b> {med.formaFarmaceutica ? med.formaFarmaceutica.nombre : "-"}</p>
-                <p className="medicine-info"><b>Laboratorio:</b> {med.labcomercializador ? med.labcomercializador : "-"}</p>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                      e.currentTarget.src = "https://placehold.co/250x150?text=Sin+imagen";
+                    }}
+                  />
+                  <h3 className="medicine-title">{med.nombre}</h3>
+                  <p className="medicine-info"><b>ID:</b> {med.nregistro}</p>
+                  <p className="medicine-info"><b>Vía de administración:</b> {med.formaFarmaceutica ? med.formaFarmaceutica.nombre : "-"}</p>
+                  <p className="medicine-info"><b>Laboratorio:</b> {med.labcomercializador ? med.labcomercializador : "-"}</p>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }
