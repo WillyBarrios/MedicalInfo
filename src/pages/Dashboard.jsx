@@ -3,71 +3,13 @@ import Navbar from "../modules/Navbar.jsx";
 import { useFavorites } from "../context/FavoritesContext.jsx";
 import "../estilos/cards.css";
 import "../estilos/dashboard.css";
+import "../estilos/modal.css";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import Footer from "../modules/Footer.jsx";
+import HorarioModal from "../modules/HorarioModal.jsx";
 
-const driverObj = driver({
-    prevBtnText: 'Anterior',
-    nextBtnText: 'Siguiente',
-    finishBtnText: 'Finalizar',
-    doneBtnText: 'Cerrar',
-    allowClose: true,
-    animate: true,
-    showProgress: true,
-    showButtons: ['next', 'previous', 'close'],
-    steps: [
-        {
-            element: '.dashboard-title',
-            popover: {
-                title: 'Listado de favoritos',
-                description: 'Aqui se cargaran los medicamentos que has marcado como favoritos.',
-                position: 'right'
-            }
-        },
-        {
-            element: '.medicine-title',
-            popover: {
-                title: 'Titulo de medicamento',
-                description: 'Titulo del medicamento seleccionado.',
-                position: 'right'
-            }
-        },
-        {
-            element: '.medicine-info',
-            popover: {
-                title: 'Información del medicamento',
-                description: 'Aqui se mostrara la información detallada del medicamento seleccionado.',
-                position: 'right'
-            }
-        },
-        {
-            element: '.medicine-card',
-            popover: {
-                title: 'Medicamento',
-                description: 'Aqui se mostrara la tarjeta del medicamento seleccionado.',
-                position: 'right'
-            }
-        },
-        {
-            element: '.favorite-btn.active',
-            popover: {
-                title: 'Boton de favoritos',
-                description: 'Aqui se mostrara el estado del medicamento como favorito.',
-                position: 'right'
-            }
-        },
-        {
-            element: '#terminamos',
-            popover: {
-                title: 'Terminamos',
-                description: 'Hemos llegado al final de nuestra presentación sobre el dashboard.',
-                position: 'left'
-            }
-        }
-    ]
-});
-driverObj.drive();
+// === helpers ===
 function getCimaImageUrl(med) {
   const base = "https://cima.aemps.es/cima";
   const candidates = [];
@@ -80,10 +22,9 @@ function getCimaImageUrl(med) {
   }
   for (const raw of candidates) {
     if (typeof raw !== "string" || raw.length === 0) continue;
-    const path = raw;
-    const clean = path.split("?")[0].split("#")[0].toLowerCase();
+    const clean = raw.split("?")[0].split("#")[0].toLowerCase();
     if (clean.endsWith(".jpg") || clean.endsWith(".jpeg") || clean.endsWith(".png")) {
-      return path.startsWith("http") ? path : `${base}${path}`;
+      return raw.startsWith("http") ? raw : `${base}${raw}`;
     }
   }
   return null;
@@ -101,15 +42,25 @@ async function fetchGoogleImage(query) {
     if (json.items && json.items.length > 0) {
       return json.items[0].link;
     }
-  } catch {
-    // ignore
-  }
+  } catch {}
   return null;
 }
 
+// === componente principal ===
 export default function Dashboard() {
   const { favorites, removeFavorite } = useFavorites();
   const [imageMap, setImageMap] = useState({});
+  const [modalOpen, setModalOpen] = useState(null);
+
+  // ⏰ estado de horarios
+  const [horarios, setHorarios] = useState(() => {
+    const saved = localStorage.getItem("horarios");
+    return saved ? JSON.parse(saved) : {};
+  });
+
+  useEffect(() => {
+    localStorage.setItem("horarios", JSON.stringify(horarios));
+  }, [horarios]);
 
   useEffect(() => {
     const initial = {};
@@ -131,7 +82,8 @@ export default function Dashboard() {
             {favorites.map((med) => {
               const cimaUrl = getCimaImageUrl(med);
               const saved = imageMap[med.nregistro] || med.imageUrl || null;
-              const imageSrc = cimaUrl || saved || "https://placehold.co/250x150?text=Sin+imagen";
+              const imageSrc =
+                cimaUrl || saved || "https://placehold.co/250x150?text=Sin+imagen";
               return (
                 <div key={med.nregistro} className="medicine-card">
                   <button
@@ -150,24 +102,55 @@ export default function Dashboard() {
                       if (!saved && !cimaUrl) {
                         const url = await fetchGoogleImage(med.nombre);
                         if (url) {
-                          setImageMap((prev) => ({ ...prev, [med.nregistro]: url }));
+                          setImageMap((prev) => ({
+                            ...prev,
+                            [med.nregistro]: url,
+                          }));
                           e.currentTarget.src = url;
                           return;
                         }
                       }
-                      e.currentTarget.src = "https://placehold.co/250x150?text=Sin+imagen";
+                      e.currentTarget.src =
+                        "https://placehold.co/250x150?text=Sin+imagen";
                     }}
                   />
                   <h3 className="medicine-title">{med.nombre}</h3>
                   <p className="medicine-info"><b>ID:</b> {med.nregistro}</p>
                   <p className="medicine-info"><b>Vía de administración:</b> {med.formaFarmaceutica ? med.formaFarmaceutica.nombre : "-"}</p>
                   <p className="medicine-info"><b>Laboratorio:</b> {med.labcomercializador ? med.labcomercializador : "-"}</p>
+
+                  {/* Horarios guardados en la tarjeta */}
+                  {horarios[med.nombre] && horarios[med.nombre].length > 0 && (
+                    <div className="horarios-list">
+                      <b>Horarios:</b>
+                      <ul>
+                        {horarios[med.nombre].map((h, i) => (
+                          <li key={i}>{h}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Botón para abrir modal */}
+                  <button onClick={() => setModalOpen(med.nombre)}>
+                    Añadir Horario
+                  </button>
                 </div>
               );
             })}
           </div>
         )}
       </div>
+
+      {/* Modal global */}
+      <HorarioModal
+        isOpen={!!modalOpen}
+        onClose={() => setModalOpen(null)}
+        medicamento={modalOpen}
+        horarios={horarios}
+        setHorarios={setHorarios}
+      />
+
       <Footer />
     </div>
   );
