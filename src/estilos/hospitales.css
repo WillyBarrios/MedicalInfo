@@ -1,0 +1,30 @@
+.hospitales-container {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 11000px;
+  margin: 4.5rem auto 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 2rem 1.5rem;
+  min-height: 200px;
+}
+.hospitales-container h2 {
+  margin-bottom: 1.2rem;
+  color: #2a4d69;
+  text-align: center;
+}
+.hospitales-container ul {
+  list-style: none;
+  padding: 0;
+}
+.hospitales-container li {
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f7fafd;
+  border-radius: 8px;
+}
+.hospitales-container li:last-child {
+  border-bottom: none;
+}

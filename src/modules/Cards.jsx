@@ -30,7 +30,10 @@ function getCimaImageUrl(med) {
 }
 
 async function fetchGoogleImage(query) {
-  if (!GOOGLE_API_KEY || !GOOGLE_CX) return null;
+  if (!GOOGLE_API_KEY || !GOOGLE_CX) {
+    console.error("Faltan GOOGLE_API_KEY o GOOGLE_CX en las variables de entorno", { GOOGLE_API_KEY, GOOGLE_CX });
+    return null;
+  }
   const url = `https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&searchType=image&q=${encodeURIComponent(query)}`;
   try {
     const res = await fetch(url);
@@ -38,8 +41,8 @@ async function fetchGoogleImage(query) {
     if (json.items && json.items.length > 0) {
       return json.items[0].link;
     }
-  } catch {
-    // silenciar
+  } catch (err) {
+    console.error("Error al buscar imagen en Google:", err);
   }
   return null;
 }

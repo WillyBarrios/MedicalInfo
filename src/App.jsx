@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./modules/Navbar";
 import Cards from "./modules/Cards";
+import Hospitales from "./modules/Hospitales";
 import SearchBar from "./modules/SearchBar";
 import "./App.css";
 import Footer from './modules/Footer'
@@ -9,7 +10,6 @@ function App() {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [count, setCount] = useState(0)
 
 
   const handleSearch = (query) => {
@@ -26,7 +26,11 @@ function App() {
         )}
         <div className="content-wrapper">
           <div className="content-inner">
-            <Cards searchQuery={searchQuery} />
+            {searchQuery.trim() === "" ? (
+              <Hospitales />
+            ) : (
+              <Cards searchQuery={searchQuery} />
+            )}
           </div>
         </div>
       </div>
