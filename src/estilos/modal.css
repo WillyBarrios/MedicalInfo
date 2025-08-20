@@ -1,30 +1,32 @@
-/* Fondo translúcido moderno que cubre toda la pantalla y centra el modal */
+/* Fondo translúcido con desenfoque elegante para cubrir toda la pantalla y centrar el modal */
 .modal {
-  display: flex; /* Usa flexbox para centrar el contenido */
   position: fixed; /* El modal se mantiene fijo en la pantalla */
-  inset: 0; /* Ocupa toda la ventana (top, right, bottom, left = 0) */
-  background: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
-  display: flex; /* Centra el contenido con flexbox */
+  inset: 0; /* Ocupa todo el viewport (top, right, bottom, left = 0) */
+  display: flex; /* Usa flexbox para centrar el contenido */
   align-items: center; /* Centra verticalmente */
   justify-content: center; /* Centra horizontalmente */
   padding: 1rem; /* Espaciado interno */
-  backdrop-filter: blur(100%); /* Aplica desenfoque al fondo */
+  background: rgba(0, 0, 0, 0.55); /* Fondo negro semitransparente */
+  backdrop-filter: blur(14px) saturate(160%); /* Aplica desenfoque y saturación al fondo */
+  -webkit-backdrop-filter: blur(14px) saturate(160%); /* Compatibilidad con Safari */
   animation: fadeIn 0.3s ease-in-out; /* Animación de aparición */
+  z-index: 1000; /* Se asegura de estar por encima de otros elementos */
 }
 
-/* Caja principal del modal */
+/* Caja principal del modal con efecto glassmorphism */
 .modal-content {
-  background: #fefefe; /* Fondo blanco */
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 24px 28px; /* Espaciado interno */
+  background: rgba(122, 177, 240, 0.897); /* Fondo azul claro semitransparente */
+  border-radius: 20px; /* Bordes redondeados */
+  padding: 32px; /* Espaciado interno */
   width: 100%; /* Ocupa todo el ancho disponible */
-  max-width: 500px; /* Ancho máximo */
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
-  animation: slideUp 0.35s ease; /* Animación de entrada */
-  font-family: 'Segoe UI', 'Roboto', sans-serif; /* Fuente moderna */
+  max-width: 460px; /* Ancho máximo */
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25); /* Sombra para dar profundidad */
+  animation: slideUp 0.35s ease; /* Animación de entrada desde abajo */
+  font-family: "Segoe UI", "Roboto", sans-serif; /* Fuente moderna */
   position: relative; /* Para posicionar el botón de cerrar */
   text-align: center; /* Centra el texto */
-  margin-top: 0px; /* Margen superior (ajustable) */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+  backdrop-filter: blur(22px) saturate(180%); /* Más desenfoque y saturación */
 }
 
 /* Botón de cerrar (X) en la esquina superior derecha */
@@ -32,93 +34,99 @@
   position: absolute; /* Posicionamiento absoluto dentro del modal */
   top: 14px; /* Distancia desde arriba */
   right: 18px; /* Distancia desde la derecha */
-  font-size: 22px; /* Tamaño del icono */
+  font-size: 24px; /* Tamaño del icono */
   font-weight: bold; /* Negrita */
-  color: #888; /* Color gris */
+  color: #fff; /* Color blanco */
   cursor: pointer; /* Cambia el cursor al pasar el mouse */
-  transition: 0.2s; /* Transición suave de color */
+  transition: color 0.3s, transform 0.25s; /* Transiciones suaves */
 }
 
 /* Efecto hover para el botón de cerrar */
 .close:hover {
-  color: #ff4d4f; /* Cambia a rojo al pasar el mouse */
+  color: #ff3b30; /* Cambia a rojo al pasar el mouse */
+  transform: rotate(90deg) scale(1.1); /* Gira y agranda el icono */
 }
 
-/* Título moderno del modal */
+/* Título del modal */
 .modal-content h2 {
-  margin-top: 0; /* Sin margen superior */
-  margin-bottom: 20px; /* Espacio debajo del título */
-  font-size: 22px; /* Tamaño de fuente */
+  margin: 0 0 22px; /* Sin margen arriba, espacio abajo */
+  font-size: 26px; /* Tamaño de fuente */
   font-weight: 700; /* Negrita */
-  color: #222; /* Color oscuro */
+  color: #fff; /* Color blanco */
+  letter-spacing: -0.4px; /* Ajuste de espaciado entre letras */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.25); /* Sombra para mejor legibilidad */
 }
 
 /* Botones de intervalos de tiempo */
-.modal-content .interval-btn {
-  background: #4a90e2; /* Fondo azul */
+.interval-btn {
+  background: linear-gradient(135deg, #4a90e2, #357abd); /* Degradado azul */
   color: #fff; /* Texto blanco */
   border: none; /* Sin borde */
-  padding: 5px 11px; /* Espaciado interno */
-  margin: 6px 4px 0 0; /* Margen entre botones */
-  border-radius: 100px; /* Bordes redondeados tipo píldora */
-  font-size: 14px; /* Tamaño de fuente */
+  padding: 10px 18px; /* Espaciado interno */
+  margin: 6px 6px 0 0; /* Margen entre botones */
+  border-radius: 50px; /* Bordes redondeados tipo píldora */
+  font-size: 15px; /* Tamaño de fuente */
   cursor: pointer; /* Cursor de mano */
-  transition: background 0.2s, transform 0.1s; /* Transiciones suaves */
+  transition: all 0.3s ease; /* Transiciones suaves */
 }
 
 /* Efecto hover para los botones de intervalo */
-.modal-content .interval-btn:hover {
-  background: #357abd; /* Azul más oscuro */
-  transform: translateY(-2px); /* Sube ligeramente el botón */
+.interval-btn:hover {
+  transform: translateY(-3px) scale(1.05); /* Sube y agranda el botón */
+  box-shadow: 0 8px 18px rgba(74, 144, 226, 0.35); /* Sombra azul */
 }
 
-/* Efecto al hacer clic en el botón de intervalo */
-.modal-content .interval-btn:active {
-  transform: translateY(0); /* Vuelve a su posición original */
+/* Efecto al hacer clic o cuando está seleccionado */
+.interval-btn:active,
+.interval-btn.selected {
+  background: linear-gradient(135deg, #00c6ff, #0072ff); /* Cambia el degradado */
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.6); /* Sombra azul intensa */
 }
 
-/* Estilo del input de tipo hora */
+/* Input de hora personalizado */
 .modal-content input[type="time"] {
   width: 100%; /* Ocupa todo el ancho */
-  padding: 12px; /* Espaciado interno */
-  margin-top: 12px; /* Espacio arriba */
-  margin-bottom: 18px; /* Espacio abajo */
-  border: 1px solid #ccc; /* Borde gris claro */
-  border-radius: 12px; /* Bordes redondeados */
-  font-size: 14px; /* Tamaño de fuente */
-  outline: none; /* Sin contorno al enfocar */
-  transition: border 0.2s, box-shadow 0.2s; /* Transiciones suaves */
+  padding: 14px; /* Espaciado interno */
+  margin: 16px 0 22px; /* Espacio arriba y abajo */
+  border: 1px solid rgba(255,255,255,0.3); /* Borde sutil */
+  border-radius: 14px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de fuente */
+  background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+  color: #fff; /* Texto blanco */
+  text-align: center; /* Centra el texto */
+  transition: all 0.3s ease; /* Transiciones suaves */
 }
 
 /* Efecto al enfocar el input de hora */
 .modal-content input[type="time"]:focus {
-  border-color: #e6eaee; /* Borde azul claro */
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); /* Sombra azul */
+  border-color: #4a90e2; /* Borde azul */
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.35); /* Sombra azul */
+  outline: none; /* Sin contorno adicional */
 }
 
-/* Botón guardar moderno */
-.modal-content .save-btn {
+/* Botón guardar horario */
+.save-btn {
   width: 100%; /* Ocupa todo el ancho */
-  padding: 12px; /* Espaciado interno */
+  padding: 15px; /* Espaciado interno */
   border: none; /* Sin borde */
-  border-radius: 14px; /* Bordes redondeados */
-  background: #00c853; /* Verde */
+  border-radius: 16px; /* Bordes redondeados */
+  background: linear-gradient(135deg, #00c853, #009e4f); /* Degradado verde */
   color: #fff; /* Texto blanco */
   font-weight: 600; /* Negrita */
-  font-size: 15px; /* Tamaño de fuente */
+  font-size: 17px; /* Tamaño de fuente */
   cursor: pointer; /* Cursor de mano */
-  transition: background 0.2s, transform 0.1s; /* Transiciones suaves */
+  transition: all 0.3s ease; /* Transiciones suaves */
 }
 
 /* Efecto hover para el botón guardar */
-.modal-content .save-btn:hover {
-  background: #00b44a; /* Verde más oscuro */
-  transform: translateY(-2px); /* Sube ligeramente el botón */
+.save-btn:hover {
+  transform: translateY(-3px) scale(1.03); /* Sube y agranda el botón */
+  box-shadow: 0 10px 22px rgba(2, 87, 37, 0.4); /* Sombra verde */
 }
 
 /* Efecto al hacer clic en el botón guardar */
-.modal-content .save-btn:active {
-  transform: translateY(0); /* Vuelve a su posición original */
+.save-btn:active {
+  transform: scale(0.96); /* Reduce el tamaño ligeramente */
 }
 
 /* Animación de aparición del fondo */
@@ -129,23 +137,22 @@
 
 /* Animación de entrada del modal desde abajo */
 @keyframes slideUp {
-  from { transform: translateY(30px); opacity: 0; }
+  from { transform: translateY(40px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
 /* Estilos responsivos para pantallas pequeñas */
 @media (max-width: 480px) {
   .modal-content {
-    padding: 20px; /* Menos padding */
-    max-width: 90%; /* Más ancho relativo */
+    padding: 24px; /* Menos padding */
+    max-width: 94%; /* Más ancho relativo */
   }
 
   .modal-content h2 {
-    font-size: 20px; /* Título más pequeño */
+    font-size: 22px; /* Título más pequeño */
   }
 
-    .modal-content .interval-btn {
-      padding: 8px 14px; /* Botones más grandes */
-      font-size: 13px; /* Fuente más pequeña */
-    }
+  .interval-btn {
+    font-size: 14px; /* Botones más pequeños */
+    padding: 8px }
   }

@@ -1,92 +1,80 @@
-// ⚠️ Recomendación:
-// El modal se renderiza encima de toda la UI, su lógica debe ser global
-// (no dentro de cada tarjeta) para evitar duplicados, errores de estado
-// y problemas de estilo. Usar un único <HorarioModal> en Dashboard.
+import { useState } from "react"; // Hook de React para manejar estados internos
+import "../estilos/modal.css";    // Importa los estilos CSS del modal
 
-import { useState } from "react";
-
+// Componente Modal para agregar o eliminar horarios de un medicamento
 export default function HorarioModal({ isOpen, onClose, medicamento, horarios, setHorarios }) {
+  // Estado para manejar el valor del input de horario personalizado
   const [personalizado, setPersonalizado] = useState("");
 
+  // Función para agregar un horario (ya sea uno de los botones o personalizado)
   const agregarHorario = (hora) => {
-    if (!hora) return;
+    if (!hora) return; // Si no hay valor, no hace nada
     setHorarios((prev) => {
-      const nuevos = { ...prev };
-      if (!nuevos[medicamento]) nuevos[medicamento] = [];
-      // Evita duplicados
-      if (!nuevos[medicamento].includes(hora)) {
-        nuevos[medicamento].push(hora);
-      }
+      // Copia los horarios previos y asigna el nuevo al medicamento actual
+      const nuevos = { ...prev, [medicamento]: [hora] };
+      // Guarda en localStorage para persistencia
       localStorage.setItem("horarios", JSON.stringify(nuevos));
       return nuevos;
     });
+    // Reinicia el input personalizado
     setPersonalizado("");
   };
 
-  const eliminarHorario = (index) => {
+  // Función para eliminar el horario del medicamento actual
+  const eliminarHorario = () => {
     setHorarios((prev) => {
-      const nuevos = { ...prev };
-      if (nuevos[medicamento]) {
-        nuevos[medicamento].splice(index, 1);
-      }
+      // Copia los horarios pero vacía el arreglo del medicamento actual
+      const nuevos = { ...prev, [medicamento]: [] };
+      // Actualiza también en localStorage
       localStorage.setItem("horarios", JSON.stringify(nuevos));
-      return { ...nuevos };
+      return nuevos;
     });
   };
 
+  // Si el modal no está abierto, no renderiza nada
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal" onClick={onClose}>
+      {/* Contenido del modal, detenemos propagación para que no se cierre si clicamos dentro */}
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        {/* Botón para cerrar el modal */}
+        <span className="close" onClick={onClose}>×</span>
+
         <h2>Añadir horario para {medicamento}</h2>
 
-        {/* Botones rápidos */}
-        <div className="quick-buttons">
+        {/* Botones rápidos con intervalos predefinidos */}
+        <div>
           {[24, 12, 8, 4].map((h) => (
-            <button key={h} onClick={() => agregarHorario(`Cada ${h}h`)}>
+            <button key={h} className="interval-btn" onClick={() => agregarHorario(`Cada ${h}h`)}>
               Cada {h}h
             </button>
           ))}
         </div>
 
-        {/* Input personalizado */}
-        <div className="custom-time">
-          <label>Horario personalizado:</label>
-          <input
-            type="time"
-            value={personalizado}
-            onChange={(e) => setPersonalizado(e.target.value)}
-          />
-          <button onClick={() => agregarHorario(personalizado)}>Guardar</button>
-        </div>
+        {/* Input para ingresar manualmente una hora */}
+        <input
+          type="time"
+          value={personalizado}
+          onChange={(e) => setPersonalizado(e.target.value)}
+        />
 
-        {/* Lista de horarios */}
-        <h3>Horarios guardados</h3>
-        <ul>
-          {(horarios[medicamento] || []).map((h, i) => (
-            <li key={i}>
-              {h}
-              <button
-                style={{
-                  marginLeft: "10px",
-                  background: "#ff4757",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "6px",
-                  padding: "4px 8px",
-                  cursor: "pointer"
-                }}
-                onClick={() => eliminarHorario(i)}
-              >
-                ✕
-              </button>
-            </li>
-          ))}
-        </ul>
+        {/* Botón para guardar el horario personalizado */}
+        <button className="save-btn" onClick={() => agregarHorario(personalizado)}>
+          Guardar horario
+        </button>
 
-        {/* Botón cerrar */}
-        <button className="close-btn" onClick={onClose}>Cerrar</button>
+        {/* Mostrar horario guardado si existe */}
+        <h3>Horario guardado</h3>
+        {horarios[medicamento]?.length > 0 ? (
+          <div className="horario-guardado">
+            <p>{horarios[medicamento][0]}</p>
+            {/* Botón para eliminar el horario */}
+            <button className="delete-btn" onClick={eliminarHorario}>✕</button>
+          </div>
+        ) : (
+          <p>No hay horario asignado</p>
+        )}
       </div>
     </div>
   );

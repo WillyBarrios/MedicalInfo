@@ -6,84 +6,71 @@ import "../estilos/dashboard.css";
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import Footer from "../modules/Footer.jsx";
+import HorarioModal from "../modules/HorarioModal.jsx";
 
 const driverObj = driver({
-    prevBtnText: 'Anterior',
-    nextBtnText: 'Siguiente',
-    finishBtnText: 'Finalizar',
-    doneBtnText: 'Cerrar',
-    allowClose: true,
-    animate: true,
-    showProgress: true,
-    showButtons: ['next', 'previous', 'close'],
-    steps: [
-        {
-            element: '.dashboard-title',
-            popover: {
-                title: 'Listado de favoritos',
-                description: 'Aqui se cargaran los medicamentos que has marcado como favoritos.',
-                position: 'right'
-            }
-        },
-        {
-            element: '.medicine-title',
-            popover: {
-                title: 'Titulo de medicamento',
-                description: 'Titulo del medicamento seleccionado.',
-                position: 'right'
-            }
-        },
-        {
-            element: '.medicine-info',
-            popover: {
-                title: 'Información del medicamento',
-                description: 'Aqui se mostrara la información detallada del medicamento seleccionado.',
-                position: 'right'
-            }
-        },
-        {
-            element: '.medicine-card',
-            popover: {
-                title: 'Medicamento',
-                description: 'Aqui se mostrara la tarjeta del medicamento seleccionado.',
-                position: 'right'
-            }
-        },
-        {
-            element: '.favorite-btn.active',
-            popover: {
-                title: 'Boton de favoritos',
-                description: 'Aqui se mostrara el estado del medicamento como favorito.',
-                position: 'right'
-            }
-        },
-        {
-            element: '#terminamos',
-            popover: {
-                title: 'Terminamos',
-                description: 'Hemos llegado al final de nuestra presentación sobre el dashboard.',
-                position: 'left'
-            }
-        }
-    ]
+  prevBtnText: "Anterior",
+  nextBtnText: "Siguiente",
+  finishBtnText: "Finalizar",
+  doneBtnText: "Cerrar",
+  allowClose: true,
+  animate: true,
+  showProgress: true,
+  showButtons: ["next", "previous", "close"],
+  steps: [
+    {
+      element: ".dashboard-title",
+      popover: {
+        title: "Listado de favoritos",
+        description: "Aquí se cargan los medicamentos que has marcado como favoritos.",
+        position: "right",
+      },
+    },
+    {
+      element: ".medicine-card",
+      popover: {
+        title: "Medicamento",
+        description: "Cada tarjeta representa un medicamento favorito.",
+        position: "right",
+      },
+    },
+    {
+      element: ".favorite-btn.active",
+      popover: {
+        title: "Botón de favoritos",
+        description: "Quita el medicamento de tus favoritos.",
+        position: "right",
+      },
+    },
+    {
+      element: "#terminamos",
+      popover: {
+        title: "Terminamos",
+        description: "Fin de la presentación del dashboard.",
+        position: "left",
+      },
+    },
+  ],
 });
 driverObj.drive();
+
 function getCimaImageUrl(med) {
   const base = "https://cima.aemps.es/cima";
   const candidates = [];
+
   if (med.foto) candidates.push(med.foto);
   if (Array.isArray(med.fotos)) {
     med.fotos.forEach((f) => {
-      if (f && typeof f === "object" && f.url) candidates.push(f.url);
+      if (f?.url) candidates.push(f.url);
       else if (typeof f === "string") candidates.push(f);
     });
   }
+
   for (const raw of candidates) {
     if (typeof raw !== "string" || raw.length === 0) continue;
-    const path = raw;
-    const clean = path.split("?")[0].split("#")[0].toLowerCase();
+    const clean = raw.split("?")[0].split("#")[0].toLowerCase();
     if (clean.endsWith(".jpg") || clean.endsWith(".jpeg") || clean.endsWith(".png")) {
-      return path.startsWith("http") ? path : `${base}${path}`;
+      return raw.startsWith("http") ? raw : `${base}${raw}`;
     }
   }
   return null;
@@ -98,11 +85,9 @@ async function fetchGoogleImage(query) {
   try {
     const res = await fetch(url);
     const json = await res.json();
-    if (json.items && json.items.length > 0) {
-      return json.items[0].link;
-    }
+    if (json.items?.length > 0) return json.items[0].link;
   } catch {
-    // ignore
+    return null;
   }
   return null;
 }
@@ -110,6 +95,12 @@ async function fetchGoogleImage(query) {
 export default function Dashboard() {
   const { favorites, removeFavorite } = useFavorites();
   const [imageMap, setImageMap] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [horarios, setHorarios] = useState(() => {
+    const saved = localStorage.getItem("horarios");
+    return saved ? JSON.parse(saved) : {};
+  });
+  const [selectedMed, setSelectedMed] = useState(null);
 
   useEffect(() => {
     const initial = {};
@@ -124,6 +115,7 @@ export default function Dashboard() {
       <Navbar />
       <div className="cards-container dashboard-container">
         <h2 className="dashboard-title">Favoritos</h2>
+
         {favorites.length === 0 ? (
           <p className="no-results">No hay medicamentos en favoritos.</p>
         ) : (
@@ -132,6 +124,7 @@ export default function Dashboard() {
               const cimaUrl = getCimaImageUrl(med);
               const saved = imageMap[med.nregistro] || med.imageUrl || null;
               const imageSrc = cimaUrl || saved || "https://placehold.co/250x150?text=Sin+imagen";
+
               return (
                 <div key={med.nregistro} className="medicine-card">
                   <button
@@ -142,6 +135,7 @@ export default function Dashboard() {
                   >
                     ✓
                   </button>
+
                   <img
                     src={imageSrc}
                     alt={med.nombre}
@@ -158,16 +152,46 @@ export default function Dashboard() {
                       e.currentTarget.src = "https://placehold.co/250x150?text=Sin+imagen";
                     }}
                   />
+
                   <h3 className="medicine-title">{med.nombre}</h3>
                   <p className="medicine-info"><b>ID:</b> {med.nregistro}</p>
-                  <p className="medicine-info"><b>Vía de administración:</b> {med.formaFarmaceutica ? med.formaFarmaceutica.nombre : "-"}</p>
-                  <p className="medicine-info"><b>Laboratorio:</b> {med.labcomercializador ? med.labcomercializador : "-"}</p>
+                  <p className="medicine-info">
+                    <b>Vía de administración:</b> {med.formaFarmaceutica?.nombre || "-"}
+                  </p>
+                  <p className="medicine-info">
+                    <b>Laboratorio:</b> {med.labcomercializador || "-"}
+                  </p>
+                  <p className="medicine-info">
+                    <b>Horario:</b>{" "}
+                    {horarios[med.nombre]?.length > 0 ? horarios[med.nombre][0] : "No asignado"}
+                  </p>
+
+                  <button
+                    className="open-modal-btn"
+                    onClick={() => {
+                      setSelectedMed(med.nombre);
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ➕ Añadir horario
+                  </button>
                 </div>
               );
             })}
           </div>
         )}
       </div>
+
+      {isModalOpen && (
+        <HorarioModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          medicamento={selectedMed}
+          horarios={horarios}
+          setHorarios={setHorarios}
+        />
+      )}
+
       <Footer />
     </div>
   );
