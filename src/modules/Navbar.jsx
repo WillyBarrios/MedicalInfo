@@ -10,7 +10,7 @@ export default function Navbar({ onSearchIconClick }) {
 
   return (
     <nav className="navbar">
-      {/* Izquierda: logo + menú */}
+      {/* IZQUIERDA: Logo + Menú */}
       <div className="navbar-left">
         <Link to="/" className="navbar-logo" aria-label="Inicio">
           <img src={logo} alt="MedicalInfo logo" />
@@ -35,27 +35,24 @@ export default function Navbar({ onSearchIconClick }) {
         </div>
       </div>
 
-      {/* Centro: eslogan */}
+      {/* CENTRO: Eslogan */}
       <div className="navbar-center">
-        <span className="navbar-slogan">Informacion que cura</span>
-        
+        <span className="navbar-slogan">Información que cura</span>
       </div>
 
-      {/* Derecha: solo la lupa */}
-      {/* Derecha: lupa con texto */}
-<div className="navbar-right">
-  <button
-    type="button"
-    onClick={handleSearchClick}
-    className="search-button"
-    title="Buscar"
-    aria-label="Buscar"
-  >
-    <FiSearch size={18} style={{ marginRight: "6px" }} />
-    Busca medicamento
-  </button>
-</div>
-
+      {/* DERECHA: Botón busca medicamento */}
+      <div className="navbar-right">
+        <button
+          type="button"
+          onClick={handleSearchClick}
+          className="navbar-button buscar-medicamento"
+          title="Buscar"
+          aria-label="Buscar"
+        >
+          <FiSearch size={18} style={{ marginRight: "6px" }} />
+          Busca medicamento
+        </button>
+      </div>
     </nav>
   );
 }
