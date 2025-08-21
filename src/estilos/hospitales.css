@@ -1,84 +1,67 @@
 .hospitales-container {
-  width: 90%;
-  max-width: 600px; /* mantenido igual */
-  margin: 4rem auto 2rem auto;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin-top: 11000px;
+  margin: 4.5rem auto 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   padding: 2rem 1.5rem;
   min-height: 200px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.hospitales-container:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
 .hospitales-container h2 {
-  margin-bottom: 1.4rem;
-  color: #1e3a8a;
+  margin-bottom: 1.2rem;
+  color: #2a4d69;
   text-align: center;
-  font-size: 1.6rem;
-  font-weight: 600;
 }
 
 .hospitales-container ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .hospitales-container li {
-  margin-bottom: 1rem;
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid #e5e7eb;
-  background: #f9fbff;
-  border-radius: 10px;
-  transition: background 0.3s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f7fafd;
+  border-radius: 8px;
 }
 
 .hospitales-container li:last-child {
   border-bottom: none;
 }
 
-.hospitales-container li:hover {
-  background: #eef3ff;
-  transform: translateX(4px);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hospitales-container {
-    padding: 1.5rem 1rem;
-  }
-
-  .hospitales-container h2 {
-    font-size: 1.4rem;
-  }
-
-  .hospitales-container li {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.9rem;
-  }
-}
-
+/* 📱 Pantallas chicas (celulares) */
 @media (max-width: 480px) {
   .hospitales-container {
-    border-radius: 12px;
     padding: 1rem;
+    max-width: 95%;
   }
-
   .hospitales-container h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
-
   .hospitales-container li {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     padding: 0.8rem;
+  }
+}
+
+/* 📲 Tablets */
+@media (max-width: 768px) {
+  .hospitales-container {
+    max-width: 90%;
+    padding: 1.5rem 1rem;
+  }
+  .hospitales-container h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* 💻 Pantallas grandes */
+@media (min-width: 1024px) {
+  .hospitales-container {
+    max-width: 500px; /* un poco más ancho en desktop */
   }
 }
