@@ -8,51 +8,56 @@ import "driver.js/dist/driver.css";
 import Footer from "../modules/Footer.jsx";
 import HorarioModal from "../modules/HorarioModal.jsx";
 
-const driverObj = driver({
-  prevBtnText: "Anterior",
-  nextBtnText: "Siguiente",
-  finishBtnText: "Finalizar",
-  doneBtnText: "Cerrar",
-  allowClose: true,
-  animate: true,
-  showProgress: true,
-  showButtons: ["next", "previous", "close"],
-  steps: [
-    {
-      element: ".dashboard-title",
-      popover: {
-        title: "Listado de favoritos",
-        description: "Aquí se cargan los medicamentos que has marcado como favoritos.",
-        position: "right",
-      },
-    },
-    {
-      element: ".medicine-card",
-      popover: {
-        title: "Medicamento",
-        description: "Cada tarjeta representa un medicamento favorito.",
-        position: "right",
-      },
-    },
-    {
-      element: ".favorite-btn.active",
-      popover: {
-        title: "Botón de favoritos",
-        description: "Quita el medicamento de tus favoritos.",
-        position: "right",
-      },
-    },
-    {
-      element: "#terminamos",
-      popover: {
-        title: "Terminamos",
-        description: "Fin de la presentación del dashboard.",
-        position: "left",
-      },
-    },
-  ],
-});
-driverObj.drive();
+
+function useDashboardTour() {
+  useEffect(() => {
+    const driverObj = driver({
+      prevBtnText: "Anterior",
+      nextBtnText: "Siguiente",
+      finishBtnText: "Finalizar",
+      doneBtnText: "Cerrar",
+      allowClose: true,
+      animate: true,
+      showProgress: true,
+      showButtons: ["next", "previous", "close"],
+      steps: [
+        {
+          element: ".dashboard-title",
+          popover: {
+            title: "Listado de favoritos",
+            description: "Aquí se cargan los medicamentos que has marcado como favoritos.",
+            position: "right",
+          },
+        },
+        {
+          element: ".medicine-card",
+          popover: {
+            title: "Medicamento",
+            description: "Cada tarjeta representa un medicamento favorito.",
+            position: "right",
+          },
+        },
+        {
+          element: ".favorite-btn.active",
+          popover: {
+            title: "Botón de favoritos",
+            description: "Quita el medicamento de tus favoritos.",
+            position: "right",
+          },
+        },
+        {
+          element: "#terminamos",
+          popover: {
+            title: "Terminamos",
+            description: "Fin de la presentación del dashboard.",
+            position: "left",
+          },
+        },
+      ],
+    });
+    driverObj.drive();
+  }, []);
+}
 
 function getCimaImageUrl(med) {
   const base = "https://cima.aemps.es/cima";
@@ -93,6 +98,7 @@ async function fetchGoogleImage(query) {
 }
 
 export default function Dashboard() {
+  useDashboardTour();
   const { favorites, removeFavorite } = useFavorites();
   const [imageMap, setImageMap] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
