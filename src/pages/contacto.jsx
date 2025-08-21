@@ -1,6 +1,9 @@
 // Importamos React y el hook useState para manejar estados
 import { useState } from "react";
 import Navbar from "../modules/Navbar.jsx";
+import { useEffect } from "react";
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
 // Importamos emailjs para enviar correos
 import emailjs from "emailjs-com";
 
@@ -15,7 +18,58 @@ import "../estilos/contacto.css";
 
 // Importamos el footer
 import Footer from '../modules/Footer.jsx';
+function useContactoTour() {
+  useEffect(() => {
+    const driverObj = driver({
+      prevBtnText: 'Anterior',
+      nextBtnText: 'Siguiente',
+      finishBtnText: 'Finalizar',
+      doneBtnText: 'Cerrar',
+      allowClose: true,
+      animate: true,
+      showProgress: true,
+      showButtons: ['next', 'previous', 'close'],
+      steps: [
+        {
+          element: '.contact-page',
+          popover: {
+            title: 'Página de contacto',
+            description: 'Aquí puedes ponerte en contacto con nosotros.',
+            position: 'right'
+          }
+        },
+        {
+          element: '.contact-form',
+          popover: {
+            title: 'Formulario',
+            description: 'Completa el formulario para enviarnos un mensaje.',
+            position: 'right'
+          }
+        },
+        {
+          element: '.phone',
+          popover: {
+            title: 'Teléfono',
+            description: 'También puedes contactarnos por teléfono.',
+            position: 'right'
+          }
+        },
+        {
+          element: '.about-title',
+          popover: {
+            title: 'Terminamos',
+            description: 'Fin del tutorial de contacto.',
+            position: 'left'
+          }
+        }
+      ]
+    });
+    driverObj.drive();
+  }, []);
+}
+
 export default function Contact() {
+  useContactoTour();
   // Estado para almacenar los valores del formulario
   const [form, setForm] = useState({
     name: "",

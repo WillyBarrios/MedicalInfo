@@ -5,53 +5,61 @@ import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import Footer from '../modules/Footer.jsx';
 
-const driverObj = driver({
-    prevBtnText: 'Anterior',
-    nextBtnText: 'Siguiente',
-    finishBtnText: 'Finalizar',
-    doneBtnText: 'Cerrar',
-    allowClose: true,
-    animate: true,
-    showProgress: true,
-    showButtons: ['next', 'previous', 'close'],
-    steps: [
+
+import { useEffect } from "react";
+
+function useNosotrosTour() {
+  useEffect(() => {
+    const driverObj = driver({
+      prevBtnText: 'Anterior',
+      nextBtnText: 'Siguiente',
+      finishBtnText: 'Finalizar',
+      doneBtnText: 'Cerrar',
+      allowClose: true,
+      animate: true,
+      showProgress: true,
+      showButtons: ['next', 'previous', 'close'],
+      steps: [
         {
-            element: '#quienessomos',
-            popover: {
-                title: 'Que es MedicalInfo',
-                description: 'Pequeña descripcion sobre nuestra empresa',
-                position: 'right'
-            }
+          element: '#quienessomos',
+          popover: {
+            title: 'Que es MedicalInfo',
+            description: 'Pequeña descripcion sobre nuestra empresa',
+            position: 'right'
+          }
         },
         {
-            element: '#mision',
-            popover: {
-                title: 'Misión',
-                description: 'Define la razón de ser de la organización, su propósito fundamental y lo que busca lograr',
-                position: 'right'
-            }
+          element: '#mision',
+          popover: {
+            title: 'Misión',
+            description: 'Define la razón de ser de la organización, su propósito fundamental y lo que busca lograr',
+            position: 'right'
+          }
         },
         {
-            element: '#vision',
-            popover: {
-                title: 'Visión',
-                description: 'Describe la aspiración futura de la empresa, es decir, hacia dónde quiere llegar a largo plazo',
-                position: 'right'
-            }
+          element: '#vision',
+          popover: {
+            title: 'Visión',
+            description: 'Describe la aspiración futura de la empresa, es decir, hacia dónde quiere llegar a largo plazo',
+            position: 'right'
+          }
         },
         {
-            element: '.about-title',
-            popover: {
-                title: 'Terminamos',
-                description: 'Hemos llegado al final de nuestra presentación sobre la empresa.',
-                position: 'left'
-            }
+          element: '.about-title',
+          popover: {
+            title: 'Terminamos',
+            description: 'Hemos llegado al final de nuestra presentación sobre la empresa.',
+            position: 'left'
+          }
         }
-    ]
-});
-driverObj.drive();
+      ]
+    });
+    driverObj.drive();
+  }, []);
+}
 
 export default function Nosotros() {
+  useNosotrosTour();
   return (
     <>
       <Navbar />
