@@ -202,7 +202,7 @@ export default function Contact() {
                 name="message"
                 value={form.message}
                 onChange={handleChange}
-                placeholder="Inserta tu mensaje aquí"
+                placeholder="Dejanos tu sugerencia, tu opinión es importante, trataremos de tomarlas en cuenta para futuras mejoras."
                 rows="4"
                 maxLength="500"
                 required
