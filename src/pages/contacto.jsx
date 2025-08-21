@@ -197,7 +197,7 @@ export default function Contact() {
 
             {/* Campo de mensaje */}
             <label>
-              <FaCommentDots className="icon" /> Mensaje:
+              <FaCommentDots className="icon" /> Caja de sugerencias:
               <textarea
                 name="message"
                 value={form.message}
