@@ -15,8 +15,8 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 56px 10px;
-  min-height: 130vh;
+ padding: 100px 10px; /* 🔑 más espacio arriba y abajo */
+    min-height: auto;   /* ya no forzamos 130vh */
   box-sizing: border-box;
 }
 
