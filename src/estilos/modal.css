@@ -156,21 +156,8 @@
     font-size: 14px; /* Botones más pequeños */
     padding: 8px }
   }
-  
-  {/* Mostrar todos los horarios guardados */}
-<h3>Horarios guardados</h3>
-{horarios[medicamento]?.length > 0 ? (
-  <div className="horarios-guardados">
-    {horarios[medicamento].map((hora, idx) => (
-      <div key={idx} className="horario-item">
-        <p>{hora}</p>
-        <button className="delete-btn" onClick={() => eliminarHorario(hora)}>✕</button>
-      </div>
-    ))}
-  </div>
-) : (
-  <p>No hay horarios asignados</p>
-)}
+
+
 
 /* Contenedor de los horarios guardados */
 .horarios-guardados {
@@ -204,12 +191,12 @@
 
 /* Botón de eliminar horario (la X) */
 .delete-btn {
-  background: #e76059;
+  background: #ffffff00;
   border: none;
-  color: #fff;
+  color: #000000;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 50%;
+  border-radius: 1%;
   width: 22px;
   height: 22px;
   cursor: pointer;
@@ -221,6 +208,6 @@
 
 /* Hover del botón eliminar */
 .delete-btn:hover {
-  background: #e74364;
+  background: #ffffff;
   transform: scale(1.1);
 }

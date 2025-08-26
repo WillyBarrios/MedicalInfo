@@ -11,16 +11,16 @@ export default function HorarioModal({ isOpen, onClose, medicamento, horarios, s
     setHorarios((prev) => {
       const existentes = prev[medicamento] || [];
 
-      // Si es personalizado, verificamos límite
+      // Contar solo los horarios personalizados (tipo "hh:mm")
       if (esPersonalizado) {
-        const personalizados = existentes.filter((h) => /^\d{2}:\d{2}$/.test(h)); // solo los que son tipo "hh:mm"
+        const personalizados = existentes.filter((h) => /^\d{2}:\d{2}$/.test(h));
         if (personalizados.length >= 6) {
           alert("Solo se permiten hasta 6 horarios personalizados.");
           return prev;
         }
       }
 
-      // Evitamos duplicados
+      // Evitar duplicados
       if (existentes.includes(hora)) return prev;
 
       const nuevos = { ...prev, [medicamento]: [...existentes, hora] };
@@ -51,7 +51,7 @@ export default function HorarioModal({ isOpen, onClose, medicamento, horarios, s
         <h2>Añadir horario para {medicamento}</h2>
 
         {/* Botones rápidos con intervalos predefinidos */}
-        <div>
+        <div className="intervalos">
           {[24, 12, 8, 4].map((h) => (
             <button
               key={h}
@@ -64,15 +64,20 @@ export default function HorarioModal({ isOpen, onClose, medicamento, horarios, s
         </div>
 
         {/* Input para ingresar manualmente una hora */}
-        <input
-          type="time"
-          value={personalizado}
-          onChange={(e) => setPersonalizado(e.target.value)}
-        />
-
-        <button className="save-btn" onClick={() => agregarHorario(personalizado, true)}>
-          Guardar horario
-        </button>
+        <div className="personalizado">
+          <input
+            type="time"
+            value={personalizado}
+            onChange={(e) => setPersonalizado(e.target.value)}
+          />
+          <button
+            className="save-btn"
+            onClick={() => agregarHorario(personalizado, true)}
+            disabled={!personalizado} // 🔑 No se puede guardar vacío
+          >
+            Guardar horario
+          </button>
+        </div>
 
         {/* Mostrar todos los horarios guardados */}
         <h3>Horarios guardados</h3>
@@ -81,7 +86,12 @@ export default function HorarioModal({ isOpen, onClose, medicamento, horarios, s
             {horarios[medicamento].map((hora, idx) => (
               <div key={idx} className="horario-item">
                 <p>{hora}</p>
-                <button className="delete-btn" onClick={() => eliminarHorario(hora)}>✕</button>
+                <button
+                  className="delete-btn"
+                  onClick={() => eliminarHorario(hora)}
+                >
+                  ✕
+                </button>
               </div>
             ))}
           </div>
