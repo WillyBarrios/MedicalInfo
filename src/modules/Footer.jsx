@@ -28,8 +28,7 @@ export default function Footer() {
           <p>© 2025 full stack - Todos los derechos reservados</p>
           <div className="footer-links">
             <a href="https://github.com/WillyBarrios/MedicalInfo.git"><FaGithub /> REPOSITORIO</a>
-            <a href="/nosotros"><FaInfoCircle /> NOSOTROS</a>
-            <a href="/contacto"><FaEnvelope /> CONTACTO</a>
+            <a href="https://sede.aemps.gob.es/docs/CIMA-REST-API_1_19.pdf"><FaInfoCircle /> Informacion de API</a>
           </div>
         </div>
 
