@@ -11,7 +11,7 @@ import Contacto from './pages/contacto.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <FavoritesProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/MedicalInfo">
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/dashboard" element={<Dashboard />} />
