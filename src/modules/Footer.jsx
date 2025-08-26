@@ -27,9 +27,9 @@ export default function Footer() {
         <div className="footer-center">
           <p>© 2025 full stack - Todos los derechos reservados</p>
           <div className="footer-links">
-            <a href="#"><FaGithub /> REPOSITORIO</a>
-            <a href="#"><FaInfoCircle /> NOSOTROS</a>
-            <a href="#"><FaEnvelope /> CONTACTO</a>
+            <a href="https://github.com/WillyBarrios/MedicalInfo.git"><FaGithub /> REPOSITORIO</a>
+            <a href="/nosotros"><FaInfoCircle /> NOSOTROS</a>
+            <a href="/contacto"><FaEnvelope /> CONTACTO</a>
           </div>
         </div>
 
