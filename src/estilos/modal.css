@@ -84,17 +84,20 @@
 }
 
 /* Input de hora personalizado */
+/*Corrige alineación del input de hora en el modal eliminando el ícono por defecto
+*/
+
 .modal-content input[type="time"] {
-  width: 100%; /* Ocupa todo el ancho */
-  padding: 14px; /* Espaciado interno */
-  margin: 16px 0 22px; /* Espacio arriba y abajo */
-  border: 1px solid rgba(255,255,255,0.3); /* Borde sutil */
-  border-radius: 14px; /* Bordes redondeados */
-  font-size: 16px; /* Tamaño de fuente */
-  background: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
-  color: #fff; /* Texto blanco */
+  width: 100%;
+  padding: 10px; /* Espaciado interno uniforme */
+  margin: 10px 0 22px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 14px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
   text-align: center; /* Centra el texto */
-  transition: all 0.3s ease; /* Transiciones suaves */
+  transition: all 0.3s ease;
 }
 
 /* Efecto al enfocar el input de hora */
@@ -209,5 +212,5 @@
 /* Hover del botón eliminar */
 .delete-btn:hover {
   background: #ffffff;
-  transform: scale(1.1);
+  transform: scale(1.1);
 }
